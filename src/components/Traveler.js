@@ -6,7 +6,7 @@ const TraverlerWrapper = styled.section`
   min-height: 300px;
   display: flex;
   flex-direction: column;
-  margin-bottom: 15px;
+  padding: 20px 0;
   border-bottom: 2px solid ${(props) => props.theme.color.lightGray};
   & > * {
     margin-bottom: 15px;
@@ -91,7 +91,7 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const Traverler = () => {
+const Traveler = () => {
   return (
     <TraverlerWrapper>
       <TravelerNumber>
@@ -132,4 +132,4 @@ const Traverler = () => {
   );
 };
 
-export default Traverler;
+export default Traveler;
