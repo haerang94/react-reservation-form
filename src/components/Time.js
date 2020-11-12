@@ -24,6 +24,7 @@ const FlexWrapper = styled.div`
     border-radius: 5px;
     height: 30px;
     padding: 0 7px;
+    color: gray;
   }
 `;
 
