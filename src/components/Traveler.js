@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { Alert } from "components/SharedComponents";
 
 const TraverlerWrapper = styled.section`
   width: 100%;
@@ -107,15 +108,18 @@ const Traveler = () => {
         <TwoInputs>
           <header>영문 이름</header>
           <input type="text" placeholder="Gil Dong" />
+          <Alert>영어로 2자 이상 입력해주세요.</Alert>
         </TwoInputs>
         <TwoInputs>
           <header>영문 성</header>
           <input type="text" placeholder="Hong" />
+          <Alert>영어로 2자 이상 입력해주세요.</Alert>
         </TwoInputs>
       </FlexContainer>
       <OneInput>
         <header>한글 이름</header>
         <input type="text" placeholder="홍길동" />
+        <Alert>한글로 2자 이상 입력해주세요.</Alert>
       </OneInput>
       <OneInput>
         <header>성별</header>
@@ -125,10 +129,12 @@ const Traveler = () => {
           <input type="radio" name="gender" id="female" />
           <label htmlFor="female">여</label>
         </ButtonContainer>
+        <Alert>성별을 선택해 주세요.</Alert>
       </OneInput>
       <OneInput>
         <header>생년월일</header>
         <input type="text" placeholder="YYMMDD" />
+        <Alert>숫자로 6자를 입력해 주세요.</Alert>
       </OneInput>
     </TraverlerWrapper>
   );
