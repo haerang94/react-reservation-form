@@ -46,8 +46,10 @@ const Time = () => {
       <header>숙소 도착 예정 시간</header>
       <FlexWrapper>
         <SelectGroup>
-          <select name="hour" id="hour">
-            <option value="none">시</option>
+          <select name="hour" id="hour" defaultValue={"default"}>
+            <option value="default" disabled>
+              시
+            </option>
             {Array(24)
               .fill(0)
               .map((item, idx) => (
@@ -57,14 +59,17 @@ const Time = () => {
           <Alert>시간을 선택해주세요.</Alert>
         </SelectGroup>
         <SelectGroup>
-          <select name="minute" id="minute">
-            <option value="none">분</option>
-            {Array(7)
+          <select name="minute" id="minute" defaultValue={"default"}>
+            <option value="default" disabled>
+              분
+            </option>
+            {Array(60)
               .fill(0)
               .map((item, idx) => (
-                <option key={`minute-${idx}`} value={idx * 10}>{`${
-                  idx * 10
-                }분`}</option>
+                <option
+                  key={`minute-${idx}`}
+                  value={idx * 10}
+                >{`${idx}분`}</option>
               ))}
           </select>
           <Alert>분을 선택해주세요.</Alert>

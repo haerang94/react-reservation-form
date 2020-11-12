@@ -48,7 +48,8 @@ const TwoInputs = styled.div`
     padding: 10px;
     height: 30px;
     width: 100%;
-    border: 1px solid ${(props) => props.theme.color.lightGray};
+    border: 1px solid
+      ${(props) => (props.flag ? props.flag : props.theme.color.lightGray)};
     border-radius: 5px;
   }
 `;
@@ -95,6 +96,7 @@ const ButtonContainer = styled.div`
 `;
 
 const Traveler = ({ values, errors, onChange, reset, idx }) => {
+  console.log(errors.firstName);
   return (
     <TraverlerWrapper>
       <TravelerNumber>
@@ -124,6 +126,7 @@ const Traveler = ({ values, errors, onChange, reset, idx }) => {
             name="lastName"
             value={values.lastName || ""}
             onChange={onChange}
+            error={errors.lastName || ""}
           />
           {errors.lastName && <Alert>{errors.lastName}</Alert>}
         </TwoInputs>
@@ -136,6 +139,7 @@ const Traveler = ({ values, errors, onChange, reset, idx }) => {
           name="koreanName"
           value={values.koreanName || ""}
           onChange={onChange}
+          error={errors.koreanName || ""}
         />
         {errors.koreanName && <Alert>{errors.koreanName}</Alert>}
       </OneInput>
@@ -148,6 +152,7 @@ const Traveler = ({ values, errors, onChange, reset, idx }) => {
             id={`male-${idx}`}
             value={values.gender || ""}
             onChange={onChange}
+            error={errors.gender || ""}
           />
           <label htmlFor={`male-${idx}`}>남</label>
           <input
@@ -156,6 +161,7 @@ const Traveler = ({ values, errors, onChange, reset, idx }) => {
             id={`female-${idx}`}
             value={values.gender || ""}
             onChange={onChange}
+            error={errors.gender || ""}
           />
           <label htmlFor={`female-${idx}`}>여</label>
         </ButtonContainer>
@@ -169,6 +175,7 @@ const Traveler = ({ values, errors, onChange, reset, idx }) => {
           value={values.birthdate || ""}
           onChange={onChange}
           name="birthdate"
+          error={errors.birthdate || ""}
         />
         {errors.birthdate && <Alert>{errors.birthdate}</Alert>}
       </OneInput>

@@ -41,9 +41,19 @@ const validBirthdate = (birthdate) => {
   return;
 };
 
+const validOtherInfo = (otherInfo) => {
+  if (!otherInfo) {
+    return "기타 예약 정보를 입력해주세요.";
+  }
+  if (otherInfo.length > 200) {
+    return "최대 200자까지 입력 가능합니다.";
+  }
+  return;
+};
+
 const valid = (
   current,
-  { firstName, lastName, koreanName, gender, birthdate },
+  { firstName, lastName, koreanName, gender, birthdate, username, otherInfo },
   checked
 ) => {
   const errors = {};
@@ -57,6 +67,10 @@ const valid = (
     errors.gender = validGender(checked);
   } else if (current === "birthdate") {
     errors.birthdate = validBirthdate(birthdate);
+  } else if (current === "username") {
+    errors.username = validEnglishName(username);
+  } else if (current === "otherInfo") {
+    errors.otherInfo = validOtherInfo(otherInfo);
   }
   return errors;
 };
