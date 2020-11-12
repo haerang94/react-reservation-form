@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const TimeWrapper = styled.section`
   width: 100%;
-  margin-bottom: 15px;
+  padding: 20px;
   border-bottom: 2px solid ${(props) => props.theme.color.lightGray};
   & header {
     font-weight: bold;
@@ -11,13 +11,16 @@ const TimeWrapper = styled.section`
     margin-bottom: 8px;
     padding-left: 2px;
   }
+  & > * {
+    margin-bottom: 15px;
+  }
 `;
 
 const FlexWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 15px;
+
   & select {
     width: 49%;
     border: 1px solid ${(props) => props.theme.color.lightGray};
@@ -34,6 +37,7 @@ const Time = () => {
       <header>숙소 도착 예정 시간</header>
       <FlexWrapper>
         <select name="hour" id="hour">
+          <option value="none">시</option>
           {Array(24)
             .fill(0)
             .map((item, idx) => (
@@ -41,6 +45,7 @@ const Time = () => {
             ))}
         </select>
         <select name="minute" id="minute">
+          <option value="none">분</option>
           {Array(7)
             .fill(0)
             .map((item, idx) => (

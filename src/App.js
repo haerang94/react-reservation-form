@@ -45,8 +45,7 @@ const GlobalStyle = createGlobalStyle`
     input, button {
         background-color: transparent;
     }
-  
- 
+
 `;
 
 const App = () => {
