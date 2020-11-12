@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Alert } from "components/SharedComponents";
 
 const ContactWrapper = styled.section`
   width: 100%;
@@ -61,13 +62,20 @@ const Name = styled(PhoneNumber)`
   width: 100%;
 `;
 
-const ContactInfo = () => {
+const ContactInfo = ({ values, onChange, reset, errors }) => {
   return (
     <ContactWrapper>
       <header>상세 핸드폰 정보</header>
       <Name>
         <header>사용자 이름</header>
-        <input type="text" placeholder="홍길동" />
+        <input
+          type="text"
+          placeholder="홍길동"
+          name="username"
+          onChange={onChange}
+          value={values.username || ""}
+        />
+        {errors.username && <Alert>{errors.username}</Alert>}
       </Name>
       <PhoneNumber>
         <header>핸드폰 번호</header>
@@ -75,7 +83,14 @@ const ContactInfo = () => {
           <select name="hour" id="hour">
             <option value="82">+82(대한민국)</option>
           </select>
-          <input type="text" placeholder="'-'없이 입력해 주세요." />
+          <input
+            type="text"
+            placeholder="'-'없이 입력해 주세요."
+            name="phoneNumber"
+            value={values.phoneNumber || ""}
+            onChange={onChange}
+          />
+          {errors.phoneNumber && <Alert>{errors.phoneNumber}</Alert>}
         </FlexContainer>
       </PhoneNumber>
     </ContactWrapper>
