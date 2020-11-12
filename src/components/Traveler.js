@@ -163,8 +163,14 @@ const Traveler = ({ values, errors, onChange, reset, idx }) => {
       </OneInput>
       <OneInput>
         <header>생년월일</header>
-        <input type="text" placeholder="YYMMDD" />
-        <Alert>숫자로 6자를 입력해 주세요.</Alert>
+        <input
+          type="text"
+          placeholder="YYMMDD"
+          value={values.birthdate || ""}
+          onChange={onChange}
+          name="birthdate"
+        />
+        {errors.birthdate && <Alert>{errors.birthdate}</Alert>}
       </OneInput>
     </TraverlerWrapper>
   );
