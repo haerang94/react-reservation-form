@@ -37,14 +37,16 @@ const Time = () => {
           {Array(24)
             .fill(0)
             .map((item, idx) => (
-              <option value={idx}>{`${idx}시`}</option>
+              <option key={`hour-${idx}`} value={idx}>{`${idx}시`}</option>
             ))}
         </select>
         <select name="minute" id="minute">
           {Array(7)
             .fill(0)
             .map((item, idx) => (
-              <option value={idx * 10}>{`${idx * 10}분`}</option>
+              <option key={`minute-${idx}`} value={idx * 10}>{`${
+                idx * 10
+              }분`}</option>
             ))}
         </select>
       </FlexWrapper>
