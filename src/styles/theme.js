@@ -13,7 +13,7 @@ const theme = {
     sm: "5px",
     smd: "10px",
     mmd: "12px",
-    md: "14px",
+    md: "13px",
     lg: "23px",
   },
 };
