@@ -1,10 +1,19 @@
 import React from "react";
-import TravelerList from "components/TravelerList";
+import Traveler from "components/Traveler";
+import useInputs from "customHooks/useInputs";
 
 const TravelerContainer = () => {
+  const [values, onChange, reset, errors] = useInputs();
+
   return (
     <div>
-      <TravelerList />
+      <Traveler
+        values={values}
+        onChange={onChange}
+        reset={reset}
+        errors={errors}
+        idx={1}
+      />
     </div>
   );
 };

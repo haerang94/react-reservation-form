@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Alert } from "components/SharedComponents";
 
@@ -94,12 +94,13 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const Traveler = () => {
+const Traveler = ({ values, errors, onChange, reset, idx }) => {
+  console.log(errors.firstName);
   return (
     <TraverlerWrapper>
       <TravelerNumber>
         <div>여행자</div>
-        <div>1</div>
+        <div>{idx}</div>
       </TravelerNumber>
       <Notice>
         예약하시는 모든 분의 정보를 여권 상과 동일하게 기입해 주시게 바랍니다.
@@ -107,27 +108,57 @@ const Traveler = () => {
       <FlexContainer>
         <TwoInputs>
           <header>영문 이름</header>
-          <input type="text" placeholder="Gil Dong" />
-          <Alert>영어로 2자 이상 입력해주세요.</Alert>
+          <input
+            type="text"
+            placeholder="Gil Dong"
+            name="firstName"
+            value={values.firstName || ""}
+            onChange={onChange}
+          />
+          {errors.firstName && <Alert>{errors.firstName}</Alert>}
         </TwoInputs>
         <TwoInputs>
           <header>영문 성</header>
-          <input type="text" placeholder="Hong" />
-          <Alert>영어로 2자 이상 입력해주세요.</Alert>
+          <input
+            type="text"
+            placeholder="Hong"
+            name="lastName"
+            value={values.lastName || ""}
+            onChange={onChange}
+          />
+          {errors.lastName && <Alert>영어로 2자 이상 입력해주세요.</Alert>}
         </TwoInputs>
       </FlexContainer>
       <OneInput>
         <header>한글 이름</header>
-        <input type="text" placeholder="홍길동" />
+        <input
+          type="text"
+          placeholder="홍길동"
+          name="koreanName"
+          value={values.koreanName || ""}
+          onChange={onChange}
+        />
         <Alert>한글로 2자 이상 입력해주세요.</Alert>
       </OneInput>
       <OneInput>
         <header>성별</header>
         <ButtonContainer>
-          <input type="radio" name="gender" id="male" />
-          <label htmlFor="male">남</label>
-          <input type="radio" name="gender" id="female" />
-          <label htmlFor="female">여</label>
+          <input
+            type="radio"
+            name="gender"
+            id={`male-${idx}`}
+            value={values.gender || ""}
+            onChange={onChange}
+          />
+          <label htmlFor={`male-${idx}`}>남</label>
+          <input
+            type="radio"
+            name="gender"
+            id={`female-${idx}`}
+            value={values.gender || ""}
+            onChange={onChange}
+          />
+          <label htmlFor={`female-${idx}`}>여</label>
         </ButtonContainer>
         <Alert>성별을 선택해 주세요.</Alert>
       </OneInput>
