@@ -95,7 +95,6 @@ const ButtonContainer = styled.div`
 `;
 
 const Traveler = ({ values, errors, onChange, reset, idx }) => {
-  console.log(errors.firstName);
   return (
     <TraverlerWrapper>
       <TravelerNumber>
@@ -126,7 +125,7 @@ const Traveler = ({ values, errors, onChange, reset, idx }) => {
             value={values.lastName || ""}
             onChange={onChange}
           />
-          {errors.lastName && <Alert>영어로 2자 이상 입력해주세요.</Alert>}
+          {errors.lastName && <Alert>{errors.lastName}</Alert>}
         </TwoInputs>
       </FlexContainer>
       <OneInput>
@@ -138,7 +137,7 @@ const Traveler = ({ values, errors, onChange, reset, idx }) => {
           value={values.koreanName || ""}
           onChange={onChange}
         />
-        <Alert>한글로 2자 이상 입력해주세요.</Alert>
+        {errors.koreanName && <Alert>{errors.koreanName}</Alert>}
       </OneInput>
       <OneInput>
         <header>성별</header>
@@ -160,7 +159,7 @@ const Traveler = ({ values, errors, onChange, reset, idx }) => {
           />
           <label htmlFor={`female-${idx}`}>여</label>
         </ButtonContainer>
-        <Alert>성별을 선택해 주세요.</Alert>
+        {errors.gender && <Alert>{errors.gender}</Alert>}
       </OneInput>
       <OneInput>
         <header>생년월일</header>
