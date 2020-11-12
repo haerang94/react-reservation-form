@@ -80,11 +80,13 @@ const ButtonContainer = styled.div`
   & label:nth-child(2) {
     border-radius: 5px 0 0 5px;
   }
-
+  & input[type="radio"] + label:hover {
+    cursor: pointer;
+  }
   & input[type="radio"]:checked + label {
-    border: 1px solid pink;
+    border: 1px solid ${(props) => props.theme.color.blue};
     color: ${(props) => props.theme.color.blue};
-    background: ${(props) => props.theme.color.beige};
+    background: ${(props) => props.theme.color.lightBlue};
     & span {
       font-weight: bold;
     }

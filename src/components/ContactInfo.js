@@ -34,6 +34,9 @@ const FlexContainer = styled.div`
     border: 1px solid ${(props) => props.theme.color.lightGray};
     border-radius: 5px;
   }
+  & select:hover {
+    cursor: pointer;
+  }
 `;
 
 const PhoneNumber = styled.div`

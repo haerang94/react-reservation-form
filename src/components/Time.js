@@ -29,6 +29,9 @@ const FlexWrapper = styled.div`
     padding: 0 7px;
     color: gray;
   }
+  & select:hover {
+    cursor: pointer;
+  }
 `;
 
 const Time = () => {
