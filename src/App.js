@@ -15,8 +15,8 @@ const GlobalStyle = createGlobalStyle`
     font-weight: normal;
     font-style: normal;
 }
-    
-
+     font-family: 'paybooc-Bold',sans-serif;
+      font-size:12px;
     }
     body{
         padding:30px;
@@ -25,7 +25,7 @@ const GlobalStyle = createGlobalStyle`
         display:flex;
         justify-content:center;
         align-items:center;
-        font-size:14px;
+        
         background:#fff;
         font-family: 'paybooc-Bold',sans-serif;
     }
@@ -45,6 +45,7 @@ const GlobalStyle = createGlobalStyle`
     input, button {
         background-color: transparent;
     }
+  
  
 `;
 
