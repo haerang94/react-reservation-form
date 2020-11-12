@@ -9,13 +9,25 @@ const GlobalStyle = createGlobalStyle`
     *{
         box-sizing:border-box;
         outline:none;
+      @font-face {
+    font-family: 'paybooc-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/paybooc-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+    
 
     }
     body{
-        font-size:14px;
+        padding:30px;
+        width:100%;
         height:100%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        font-size:14px;
         background:#fff;
-        
+        font-family: 'paybooc-Bold',sans-serif;
     }
     a{
         text-decoration:none;
