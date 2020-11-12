@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const TraverlerWrapper = styled.div`
+const TraverlerWrapper = styled.section`
   width: 100%;
   min-height: 300px;
   display: flex;
@@ -15,7 +15,7 @@ const TravelerNumber = styled.header`
   font-size: ${(props) => props.theme.size.md};
   display: flex;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   & div:nth-child(2) {
     color: ${(props) => props.theme.color.blue};
   }
@@ -38,7 +38,7 @@ const TwoInputs = styled.div`
   & header {
     font-weight: bold;
     font-size: ${(props) => props.theme.size.mmd};
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     padding-left: 2px;
   }
   & input {
@@ -57,17 +57,35 @@ const OneInput = styled(TwoInputs)`
 const ButtonContainer = styled.div`
   display: flex;
   width: 100%;
-  & input {
-    padding: 0;
-    width: 50%;
-    font-weight: bold;
-    font-size: ${(props) => props.theme.size.mmd};
+
+  & input[type="radio"] {
+    display: none;
   }
-  & input:nth-child(1) {
+  & label {
+    width: 50%;
+    font-size: ${(props) => props.theme.size.mmd};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border: 1px solid ${(props) => props.theme.color.lightGray};
+    border-radius: 5px;
+    height: 30px;
+  }
+  & label:nth-child(4) {
+    border-radius: 0 5px 5px 0;
+  }
+  & label:nth-child(2) {
     border-radius: 5px 0 0 5px;
   }
-  & input:nth-child(2) {
-    border-radius: 0 5px 5px 0;
+
+  & input[type="radio"]:checked + label {
+    border: 1px solid pink;
+    color: ${(props) => props.theme.color.blue};
+    background: ${(props) => props.theme.color.beige};
+    & span {
+      font-weight: bold;
+    }
   }
 `;
 
@@ -98,8 +116,10 @@ const Traverler = () => {
       <OneInput>
         <header>성별</header>
         <ButtonContainer>
-          <input type="button" value="남" />
-          <input type="button" value="여" />
+          <input type="radio" name="gender" id="male" />
+          <label htmlFor="male">남</label>
+          <input type="radio" name="gender" id="female" />
+          <label htmlFor="female">여</label>
         </ButtonContainer>
       </OneInput>
       <OneInput>

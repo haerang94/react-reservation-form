@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Traveler from "components/Traveler";
 import TravelerContainer from "containers/TravelerContainer";
+import TimeContainer from "containers/TimeContainer";
+
 const ReservationWrapper = styled.section`
   width: 370px;
   min-height: 300px;
@@ -13,6 +14,7 @@ const Reservation = () => {
   return (
     <ReservationWrapper>
       <TravelerContainer />
+      <TimeContainer />
     </ReservationWrapper>
   );
 };
