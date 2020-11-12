@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const TimeWrapper = styled.section`
   width: 100%;
-  padding: 20px 0;
+  padding: 20px;
   border-bottom: 2px solid ${(props) => props.theme.color.lightGray};
   & header {
     font-weight: bold;

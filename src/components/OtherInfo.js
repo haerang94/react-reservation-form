@@ -3,16 +3,15 @@ import styled from "styled-components";
 
 const OtherInfoWrapper = styled.section`
   width: 100%;
-  padding: 20px 0;
+  padding: 20px;
   & header {
     font-weight: bold;
     font-size: ${(props) => props.theme.size.md};
     margin-bottom: 15px;
     padding-left: 2px;
   }
-  & > * {
-    margin-bottom: 15px;
-  }
+
+  border-bottom: 10px solid ${(props) => props.theme.color.lightGray};
 `;
 
 const Transportation = styled.div`
@@ -26,10 +25,11 @@ const Transportation = styled.div`
 
   & textarea {
     padding: 10px;
-    height: 60px;
+    height: 100px;
     width: 100%;
     border: 1px solid ${(props) => props.theme.color.lightGray};
     border-radius: 5px;
+    resize: none;
   }
 `;
 

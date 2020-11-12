@@ -6,7 +6,7 @@ const TraverlerWrapper = styled.section`
   min-height: 300px;
   display: flex;
   flex-direction: column;
-  padding: 20px 0;
+  padding: 20px;
   border-bottom: 2px solid ${(props) => props.theme.color.lightGray};
   & > * {
     margin-bottom: 15px;

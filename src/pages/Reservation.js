@@ -9,17 +9,18 @@ const ReservationWrapper = styled.section`
   width: 370px;
   min-height: 300px;
   border: 1px solid #ddd;
-  padding: 15px;
 `;
 
 const Reservation = () => {
   return (
-    <ReservationWrapper>
-      <TravelerContainer />
-      <TimeContainer />
-      <ContactInfoContainer />
-      <OtherInfoContainer />
-    </ReservationWrapper>
+    <>
+      <ReservationWrapper>
+        <TravelerContainer />
+        <TimeContainer />
+        <ContactInfoContainer />
+        <OtherInfoContainer />
+      </ReservationWrapper>
+    </>
   );
 };
 
