@@ -4,6 +4,7 @@ import TravelerContainer from "containers/TravelerContainer";
 import TimeContainer from "containers/TimeContainer";
 import ContactInfoContainer from "containers/ContactInfoContainer";
 import OtherInfoContainer from "containers/OtherInfoContainer";
+import TermsContainer from "containers/TermsContainer";
 
 const ReservationWrapper = styled.section`
   width: 370px;
@@ -19,6 +20,7 @@ const Reservation = () => {
         <TimeContainer />
         <ContactInfoContainer />
         <OtherInfoContainer />
+        <TermsContainer />
       </ReservationWrapper>
     </>
   );
