@@ -44,6 +44,7 @@ function useInputs() {
 
       for (const [key, value] of Object.entries(newErrors)) {
         for (const [k, v] of Object.entries(value)) {
+          if (key === "1") continue;
           if (v) {
             console.log(key, k);
             dispatch(setFocus([key, k]));

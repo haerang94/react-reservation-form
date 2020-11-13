@@ -3,10 +3,15 @@ import OtherInfo from "components/OtherInfo";
 import useInputs from "customHooks/useInputs";
 
 const OtherInfoContainer = () => {
-  const [values, onChange, errors] = useInputs();
+  const [values, onChange, errors, , focus] = useInputs();
 
   return (
-    <OtherInfo values={values} onChange={onChange} errors={errors}></OtherInfo>
+    <OtherInfo
+      values={values}
+      onChange={onChange}
+      errors={errors}
+      focus={focus}
+    ></OtherInfo>
   );
 };
 

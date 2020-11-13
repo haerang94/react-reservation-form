@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { Alert } from "components/SharedComponents";
 
@@ -36,7 +36,15 @@ const Transportation = styled.div`
   }
 `;
 
-const OtherInfo = ({ values, onChange, errors }) => {
+const OtherInfo = ({ values, onChange, errors, focus }) => {
+  const otherInfoRef = useRef();
+  useEffect(() => {
+    console.log(focus);
+    const [, target] = focus;
+    if (target === "otherInfo") {
+      otherInfoRef.current.focus();
+    }
+  }, [focus]);
   return (
     <OtherInfoWrapper>
       <header>기타 예약 정보</header>
@@ -48,6 +56,7 @@ const OtherInfo = ({ values, onChange, errors }) => {
           name="otherInfo"
           onChange={(e) => onChange(0, e)}
           alert={errors[0].otherInfo}
+          ref={otherInfoRef}
         ></Textarea>
         {errors[0].otherInfo && <Alert>{errors[0].otherInfo}</Alert>}
       </Transportation>
