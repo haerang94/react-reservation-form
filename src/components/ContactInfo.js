@@ -51,7 +51,7 @@ const Name = styled(PhoneNumber)`
   width: 100%;
 `;
 
-const ContactInfo = ({ values, onChange, reset, errors }) => {
+const ContactInfo = ({ values, onChange, errors }) => {
   return (
     <ContactWrapper>
       <header>상세 핸드폰 정보</header>

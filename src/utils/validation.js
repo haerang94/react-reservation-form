@@ -63,6 +63,7 @@ const validPhoneNumber = (phoneNumber) => {
   }
 };
 
+// 현재 onChange가 일어나는 input창에서만 경고 메세지를 띄우고 싶어 current로 현재 input이 일어나는 태그를 표시했습니다.
 const valid = (
   current,
   {

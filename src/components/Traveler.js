@@ -88,7 +88,7 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const Traveler = ({ values, errors, onChange, reset, idx }) => {
+const Traveler = ({ values, errors, onChange, idx }) => {
   return (
     <TraverlerWrapper>
       <TravelerNumber>

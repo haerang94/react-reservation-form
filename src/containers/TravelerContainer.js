@@ -3,16 +3,10 @@ import Traveler from "components/Traveler";
 import useInputs from "customHooks/useInputs";
 
 const TravelerContainer = () => {
-  const [values, onChange, reset, errors] = useInputs();
+  const [values, onChange, errors] = useInputs();
   return (
     <div>
-      <Traveler
-        values={values}
-        onChange={onChange}
-        reset={reset}
-        errors={errors}
-        idx={1}
-      />
+      <Traveler values={values} onChange={onChange} errors={errors} idx={1} />
     </div>
   );
 };

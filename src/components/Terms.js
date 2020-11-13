@@ -92,7 +92,6 @@ const SubmitBtn = styled.button`
 `;
 
 const Terms = ({ values, onChange }) => {
-  console.log(values);
   return (
     <TermsWrapper>
       <header>약관 동의</header>
@@ -129,7 +128,12 @@ const Terms = ({ values, onChange }) => {
           특가 항공권 및 할인 혜택 안내 동의 (선택)
         </label>
       </div>
-      <SubmitBtn>결제하기</SubmitBtn>
+      <SubmitBtn
+        onClick={() => alert("clicked")}
+        disabled={!values.travelerTerm}
+      >
+        결제하기
+      </SubmitBtn>
     </TermsWrapper>
   );
 };

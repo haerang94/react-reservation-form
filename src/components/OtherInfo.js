@@ -36,7 +36,7 @@ const Transportation = styled.div`
   }
 `;
 
-const OtherInfo = ({ values, onChange, reset, errors }) => {
+const OtherInfo = ({ values, onChange, errors }) => {
   return (
     <OtherInfoWrapper>
       <header>기타 예약 정보</header>

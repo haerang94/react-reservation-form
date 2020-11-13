@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import valid from "utils/validation";
-function useInputs(initialForm) {
+function useInputs() {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
 
@@ -15,8 +15,8 @@ function useInputs(initialForm) {
     },
     [values]
   );
-  const reset = useCallback(() => setValues(initialForm), [initialForm]);
-  return [values, onChange, reset, errors];
+
+  return [values, onChange, errors];
 }
 
 export default useInputs;
