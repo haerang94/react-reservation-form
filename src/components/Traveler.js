@@ -143,7 +143,7 @@ const Traveler = ({ values, errors, onChange, reset, idx }) => {
             type="radio"
             name="gender"
             id={`male-${idx}`}
-            value={values.gender || ""}
+            value={"남"}
             onChange={onChange}
             alert={errors.gender}
           />
@@ -152,7 +152,7 @@ const Traveler = ({ values, errors, onChange, reset, idx }) => {
             type="radio"
             name="gender"
             id={`female-${idx}`}
-            value={values.gender || ""}
+            value={"여"}
             onChange={onChange}
             alert={errors.gender}
           />
