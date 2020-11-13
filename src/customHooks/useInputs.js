@@ -14,7 +14,7 @@ function useInputs() {
     (e) => {
       e.persist();
       const { name, value } = e.target;
-
+      console.log(name, value);
       const newValues = { ...info, [name]: value };
 
       const newErrors = valid(newValues, name, info_errors);
