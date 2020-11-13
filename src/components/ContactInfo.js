@@ -70,7 +70,7 @@ const ContactInfo = ({ values, onChange, reset, errors }) => {
       <PhoneNumber>
         <header>핸드폰 번호</header>
         <FlexContainer>
-          <select name="hour" id="hour">
+          <select name="hour" id="hour" defatulvalue={"82"}>
             <option value="82">+82(대한민국)</option>
           </select>
           <div>

@@ -18,7 +18,10 @@ const TermsWrapper = styled.section`
     display: block;
     cursor: pointer;
     font-size: ${(props) => props.theme.size.mmd};
+<<<<<<< Updated upstream
     padding: 0.1em;
+=======
+>>>>>>> Stashed changes
   }
 
   & input[type="checkbox"] {
@@ -30,6 +33,7 @@ const TermsWrapper = styled.section`
     border: 0.1em solid mediumseagreen;
     border-radius: 0.2em;
     display: inline-block;
+<<<<<<< Updated upstream
     width: ${(props) => props.theme.size.smd};
     height: ${(props) => props.theme.size.smd};
     margin-right: 1em;
@@ -42,6 +46,19 @@ const TermsWrapper = styled.section`
 
   & input[type="checkbox"] + label:active:before {
     transform: scale(0.5);
+=======
+    width: ${(props) => props.theme.size.mmd};
+    height: ${(props) => props.theme.size.mmd};
+    margin-right: 1em;
+    vertical-align: bottom;
+    color: transparent;
+    transition: 0.1s;
+    font-size: ${(props) => props.theme.size.mmd};
+  }
+
+  & input[type="checkbox"] + label:active:before {
+    transform: scale(0);
+>>>>>>> Stashed changes
     border: 1px solid mediumseagreen;
   }
 
@@ -74,23 +91,37 @@ const SubmitBtn = styled.button`
   }
 `;
 
-const Terms = () => {
+const Terms = ({ values, onClick, checked }) => {
   return (
     <TermsWrapper>
       <header>약관 동의</header>
 
-      <input type="checkbox" name="all-terms" id="all-terms" />
-      <label htmlFor="all-terms">전체 약관 동의</label>
+      <input
+        type="checkbox"
+        name="allTerms"
+        id="allTerms"
+        value={values.allTerms || ""}
+        onClick={onClick}
+      />
+      <label htmlFor="allTerms">전체 약관 동의</label>
 
       <div>
         <input
           type="checkbox"
-          name="traveler-term-agree"
-          id="traveler-term-agree"
+          name="travelerTerm"
+          id="travelerTerm"
+          value={values.travelerTerm || ""}
+          onClick={onClick}
         />
-        <label htmlFor="traveler-term-agree">여행자 약관 동의 (필수)</label>
-        <input type="checkbox" name="bargain-agree" id="bargain-agree" />
-        <label htmlFor="bargain-agree">
+        <label htmlFor="travelerTerm">여행자 약관 동의 (필수)</label>
+        <input
+          type="checkbox"
+          name="bargainTerm"
+          id="bargainTerm"
+          value={values.bargainTerm}
+          onClick={onClick}
+        />
+        <label htmlFor="bargainTerm">
           특가 항공권 및 할인 혜택 안내 동의 (선택)
         </label>
       </div>
