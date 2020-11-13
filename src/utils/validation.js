@@ -24,8 +24,8 @@ const validKorean = (name) => {
   return;
 };
 
-const validGender = (checked) => {
-  if (!checked) {
+const validGender = (gender) => {
+  if (!gender) {
     return "성별을 선택해주세요.";
   }
   return;
@@ -78,17 +78,18 @@ const valid = (
     hour,
     minute,
   },
-  checked
+  submit
 ) => {
   const errors = {};
-  if (current === "firstName") {
+  if (submit || current === "firstName") {
     errors.firstName = validEnglishName(firstName);
-  } else if (current === "lastName") {
+  }
+  if (submit || current === "lastName") {
     errors.lastName = validEnglishName(lastName);
   } else if (current === "koreanName") {
     errors.koreanName = validKorean(koreanName);
   } else if (current === "gender") {
-    errors.gender = validGender(checked);
+    errors.gender = validGender(gender);
   } else if (current === "birthdate") {
     errors.birthdate = validBirthdate(birthdate);
   } else if (current === "username") {
@@ -107,4 +108,6 @@ const valid = (
   return errors;
 };
 
-export default valid;
+const validSubmit = () => {};
+
+export { valid, validSubmit };

@@ -18,10 +18,7 @@ const TermsWrapper = styled.section`
     display: block;
     cursor: pointer;
     font-size: ${(props) => props.theme.size.mmd};
-<<<<<<< Updated upstream
     padding: 0.1em;
-=======
->>>>>>> Stashed changes
   }
 
   & input[type="checkbox"] {
@@ -33,7 +30,6 @@ const TermsWrapper = styled.section`
     border: 0.1em solid mediumseagreen;
     border-radius: 0.2em;
     display: inline-block;
-<<<<<<< Updated upstream
     width: ${(props) => props.theme.size.smd};
     height: ${(props) => props.theme.size.smd};
     margin-right: 1em;
@@ -46,19 +42,6 @@ const TermsWrapper = styled.section`
 
   & input[type="checkbox"] + label:active:before {
     transform: scale(0.5);
-=======
-    width: ${(props) => props.theme.size.mmd};
-    height: ${(props) => props.theme.size.mmd};
-    margin-right: 1em;
-    vertical-align: bottom;
-    color: transparent;
-    transition: 0.1s;
-    font-size: ${(props) => props.theme.size.mmd};
-  }
-
-  & input[type="checkbox"] + label:active:before {
-    transform: scale(0);
->>>>>>> Stashed changes
     border: 1px solid mediumseagreen;
   }
 
@@ -81,21 +64,21 @@ const TermsWrapper = styled.section`
 const SubmitBtn = styled.button`
   height: 40px;
   width: 100%;
-  background: ${(props) => props.theme.color.blue};
+  background: ${(props) =>
+    props.disabled ? props.theme.color.lightGray : props.theme.color.blue};
   color: #fff;
   font-weight: bold;
   border: none;
   border-radius: 5px;
   &:hover {
-    cursor: pointer;
+    cursor: ${(props) => (props.disabled ? "default" : "pointer")};
   }
 `;
 
-const Terms = ({ values, onChange }) => {
+const Terms = ({ values, onChange, onSubmit }) => {
   return (
     <TermsWrapper>
       <header>약관 동의</header>
-
       <input
         type="checkbox"
         name="allTerms"
@@ -128,10 +111,7 @@ const Terms = ({ values, onChange }) => {
           특가 항공권 및 할인 혜택 안내 동의 (선택)
         </label>
       </div>
-      <SubmitBtn
-        onClick={() => alert("clicked")}
-        disabled={!values.travelerTerm}
-      >
+      <SubmitBtn onClick={onSubmit} disabled={!values.travelerTerm}>
         결제하기
       </SubmitBtn>
     </TermsWrapper>

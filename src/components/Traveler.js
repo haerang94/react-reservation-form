@@ -89,6 +89,7 @@ const ButtonContainer = styled.div`
 `;
 
 const Traveler = ({ values, errors, onChange, idx }) => {
+  console.log("errors", errors);
   return (
     <TraverlerWrapper>
       <TravelerNumber>

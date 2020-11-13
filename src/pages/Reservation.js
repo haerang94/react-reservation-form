@@ -14,15 +14,13 @@ const ReservationWrapper = styled.section`
 
 const Reservation = () => {
   return (
-    <>
-      <ReservationWrapper>
-        <TravelerContainer />
-        <TimeContainer />
-        <ContactInfoContainer />
-        <OtherInfoContainer />
-        <TermsContainer />
-      </ReservationWrapper>
-    </>
+    <ReservationWrapper>
+      <TravelerContainer />
+      <TimeContainer />
+      <ContactInfoContainer />
+      <OtherInfoContainer />
+      <TermsContainer />
+    </ReservationWrapper>
   );
 };
 
