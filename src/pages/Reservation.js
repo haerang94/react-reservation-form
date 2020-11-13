@@ -12,7 +12,7 @@ const ReservationWrapper = styled.section`
   border: 1px solid #ddd;
 `;
 
-const Reservation = () => {
+const Reservation = React.memo(() => {
   return (
     <ReservationWrapper>
       <TravelerContainer />
@@ -22,6 +22,6 @@ const Reservation = () => {
       <TermsContainer />
     </ReservationWrapper>
   );
-};
+});
 
 export default Reservation;

@@ -36,7 +36,7 @@ const Transportation = styled.div`
   }
 `;
 
-const OtherInfo = ({ values, onChange, errors, focus }) => {
+const OtherInfo = React.memo(({ values, onChange, errors, focus }) => {
   const otherInfoRef = useRef();
   useEffect(() => {
     console.log(focus);
@@ -62,6 +62,6 @@ const OtherInfo = ({ values, onChange, errors, focus }) => {
       </Transportation>
     </OtherInfoWrapper>
   );
-};
+});
 
 export default OtherInfo;

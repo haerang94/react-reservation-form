@@ -2,7 +2,7 @@ import React from "react";
 import Time from "components/Time";
 import useInputs from "customHooks/useInputs";
 
-const TimeContainer = () => {
+const TimeContainer = React.memo(() => {
   const [values, onChange, errors, , focus] = useInputs();
   return (
     <Time
@@ -12,6 +12,6 @@ const TimeContainer = () => {
       focus={focus}
     ></Time>
   );
-};
+});
 
 export default TimeContainer;

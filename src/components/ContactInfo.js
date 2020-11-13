@@ -51,7 +51,7 @@ const Name = styled(PhoneNumber)`
   width: 100%;
 `;
 
-const ContactInfo = ({ values, onChange, errors, focus }) => {
+const ContactInfo = React.memo(({ values, onChange, errors, focus }) => {
   const userNameRef = useRef();
   const phoneNumberRef = useRef();
   useEffect(() => {
@@ -102,6 +102,6 @@ const ContactInfo = ({ values, onChange, errors, focus }) => {
       </PhoneNumber>
     </ContactWrapper>
   );
-};
+});
 
 export default ContactInfo;

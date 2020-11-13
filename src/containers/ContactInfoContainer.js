@@ -2,7 +2,7 @@ import React from "react";
 import ContactInfo from "components/ContactInfo";
 import useInputs from "customHooks/useInputs";
 
-const ContactInfoContainer = () => {
+const ContactInfoContainer = React.memo(() => {
   const [values, onChange, errors, , focus] = useInputs();
 
   return (
@@ -13,6 +13,6 @@ const ContactInfoContainer = () => {
       focus={focus}
     ></ContactInfo>
   );
-};
+});
 
 export default ContactInfoContainer;

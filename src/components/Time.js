@@ -42,7 +42,7 @@ const SelectGroup = styled.div`
   flex-direction: column;
 `;
 
-const Time = ({ values, errors, onChange, focus }) => {
+const Time = React.memo(({ values, errors, onChange, focus }) => {
   const hourRef = useRef();
   const minuteRef = useRef();
   useEffect(() => {
@@ -101,6 +101,6 @@ const Time = ({ values, errors, onChange, focus }) => {
       </FlexWrapper>
     </TimeWrapper>
   );
-};
+});
 
 export default Time;

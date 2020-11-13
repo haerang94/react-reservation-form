@@ -2,7 +2,7 @@ import React from "react";
 import OtherInfo from "components/OtherInfo";
 import useInputs from "customHooks/useInputs";
 
-const OtherInfoContainer = () => {
+const OtherInfoContainer = React.memo(() => {
   const [values, onChange, errors, , focus] = useInputs();
 
   return (
@@ -13,6 +13,6 @@ const OtherInfoContainer = () => {
       focus={focus}
     ></OtherInfo>
   );
-};
+});
 
 export default OtherInfoContainer;
