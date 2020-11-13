@@ -61,11 +61,11 @@ const ContactInfo = ({ values, onChange, errors }) => {
           type="text"
           placeholder="홍길동"
           name="username"
-          onChange={onChange}
-          value={values.username || ""}
-          alert={errors.username}
+          onChange={(e) => onChange(0, e)}
+          value={values[0].username || ""}
+          alert={errors[0].username}
         />
-        {errors.username && <Alert>{errors.username}</Alert>}
+        {errors[0].username && <Alert>{errors[0].username}</Alert>}
       </Name>
       <PhoneNumber>
         <header>핸드폰 번호</header>
@@ -78,11 +78,11 @@ const ContactInfo = ({ values, onChange, errors }) => {
               type="text"
               placeholder="'-'없이 입력해 주세요."
               name="phoneNumber"
-              value={values.phoneNumber || ""}
-              onChange={onChange}
-              alert={errors.phoneNumber}
+              value={values[0].phoneNumber || ""}
+              onChange={(e) => onChange(0, e)}
+              alert={errors[0].phoneNumber}
             />
-            {errors.phoneNumber && <Alert>{errors.phoneNumber}</Alert>}
+            {errors[0].phoneNumber && <Alert>{errors[0].phoneNumber}</Alert>}
           </div>
         </FlexContainer>
       </PhoneNumber>
