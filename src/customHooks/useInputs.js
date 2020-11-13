@@ -41,6 +41,50 @@ function useInputs() {
     [info, dispatch, info_errors]
   );
 
+  const reset = useCallback(() => {
+    dispatch(
+      setInfo([
+        {
+          firstName: null,
+          lastName: null,
+          koreanName: null,
+          gender: null,
+          birthdate: null,
+          hour: "시",
+          minute: "분",
+        },
+        {
+          firstName: null,
+          lastName: null,
+          koreanName: null,
+          gender: null,
+          birthdate: null,
+        },
+      ])
+    );
+    dispatch(
+      setInfoErrors([
+        {
+          firstName: null,
+          lastName: null,
+          koreanName: null,
+          gender: null,
+          birthdate: null,
+        },
+        {
+          firstName: null,
+          lastName: null,
+          koreanName: null,
+          gender: null,
+          birthdate: null,
+          hour: null,
+          minute: null,
+        },
+      ])
+    );
+    dispatch(setFocus([]));
+  }, [dispatch]);
+
   const onSubmit = useCallback(
     (e) => {
       e.persist();
@@ -77,8 +121,9 @@ function useInputs() {
       }
       // 모든 유효성 검사를 통과했다면 예약 완료
       alert("예약이 완료되었습니다.");
+      reset();
     },
-    [info, dispatch, info_errors]
+    [info, dispatch, info_errors, reset]
   );
 
   return [info, onChange, info_errors, onSubmit, focus];
