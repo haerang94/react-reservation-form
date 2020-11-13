@@ -113,7 +113,7 @@ const Traveler = React.memo(({ values, errors, onChange, idx, focus }) => {
         birthdateRef.current.focus();
       }
     }
-  }, [errors, idx, focus]);
+  }, [idx, focus]);
 
   return (
     <TraverlerWrapper>

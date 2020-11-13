@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { Alert, Input } from "components/SharedComponents";
 
@@ -51,7 +51,19 @@ const Name = styled(PhoneNumber)`
   width: 100%;
 `;
 
-const ContactInfo = ({ values, onChange, errors }) => {
+const ContactInfo = ({ values, onChange, errors, focus }) => {
+  const userNameRef = useRef();
+  const phoneNumberRef = useRef();
+  useEffect(() => {
+    console.log(focus);
+    const [, target] = focus;
+
+    if (target === "username") {
+      userNameRef.current.focus();
+    } else if (target === "phoneNumber") {
+      phoneNumberRef.current.focus();
+    }
+  }, [focus]);
   return (
     <ContactWrapper>
       <header>상세 핸드폰 정보</header>
@@ -64,6 +76,7 @@ const ContactInfo = ({ values, onChange, errors }) => {
           onChange={(e) => onChange(0, e)}
           value={values[0].username || ""}
           alert={errors[0].username}
+          ref={userNameRef}
         />
         {errors[0].username && <Alert>{errors[0].username}</Alert>}
       </Name>
@@ -81,6 +94,7 @@ const ContactInfo = ({ values, onChange, errors }) => {
               value={values[0].phoneNumber || ""}
               onChange={(e) => onChange(0, e)}
               alert={errors[0].phoneNumber}
+              ref={phoneNumberRef}
             />
             {errors[0].phoneNumber && <Alert>{errors[0].phoneNumber}</Alert>}
           </div>

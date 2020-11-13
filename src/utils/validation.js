@@ -102,12 +102,13 @@ const valid = (
   if ((!idx && !current) || current === "username") {
     errors.username = validEnglishName(username);
   }
-  if ((!idx && !current) || current === "otherInfo") {
-    errors.otherInfo = validOtherInfo(otherInfo);
-  }
   if ((!idx && !current) || current === "phoneNumber") {
     errors.phoneNumber = validPhoneNumber(phoneNumber);
   }
+  if ((!idx && !current) || current === "otherInfo") {
+    errors.otherInfo = validOtherInfo(otherInfo);
+  }
+
   if (!current || current === "hour") {
     if (hour === "시") errors.hour = "시간을 선택해주세요.";
     else errors.hour = null;
