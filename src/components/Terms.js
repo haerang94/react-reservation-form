@@ -75,7 +75,7 @@ const SubmitBtn = styled.button`
   }
 `;
 
-const Terms = ({ values, onChange, onSubmit }) => {
+const Terms = React.memo(({ values, onChange, onSubmit }) => {
   return (
     <TermsWrapper>
       <header>약관 동의</header>
@@ -116,6 +116,6 @@ const Terms = ({ values, onChange, onSubmit }) => {
       </SubmitBtn>
     </TermsWrapper>
   );
-};
+});
 
 export default Terms;

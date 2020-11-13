@@ -1,10 +1,13 @@
-import { useState, useCallback, useEffect } from "react";
-import { valid, validSubmit } from "utils/validation";
+import { useState, useCallback } from "react";
+import { valid } from "utils/validation";
+import { setInfo } from "modules/info";
+import { useDispatch } from "react-redux";
+
 function useInputs(initialState) {
   const [values, setValues] = useState(initialState);
-  const [errors, setErrors] = useState(initialState);
+  const [errors, setErrors] = useState({});
+  const dispatch = useDispatch();
 
-  useEffect(() => {}, [errors]);
   const onChange = useCallback(
     (e) => {
       e.persist();
@@ -13,6 +16,7 @@ function useInputs(initialState) {
       const newValues = { ...values, [name]: value };
       setValues((values) => ({ ...values, [name]: value }));
       setErrors(valid(name, newValues));
+      dispatch(setInfo(newValues));
     },
     [values]
   );
