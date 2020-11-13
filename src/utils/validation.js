@@ -8,7 +8,7 @@ const validEnglishName = (name) => {
   if (!/^([a-zA-Z ]+)$/.test(name)) {
     return "영어와 띄워쓰기만 입력 가능합니다.";
   }
-  return;
+  return null;
 };
 
 const validKorean = (name) => {
@@ -21,14 +21,14 @@ const validKorean = (name) => {
   if (!/^([ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+)$/.test(name)) {
     return "한글만 입력 가능합니다.";
   }
-  return;
+  return null;
 };
 
 const validGender = (gender) => {
   if (gender !== "여" && gender !== "남") {
     return "성별을 선택해주세요.";
   }
-  return;
+  return null;
 };
 
 const validBirthdate = (birthdate) => {
@@ -38,7 +38,7 @@ const validBirthdate = (birthdate) => {
   if (!/^([0-9]+)$/.test(birthdate)) {
     return "숫자만 입력 가능합니다.";
   }
-  return;
+  return null;
 };
 
 const validOtherInfo = (otherInfo) => {
@@ -48,7 +48,7 @@ const validOtherInfo = (otherInfo) => {
   if (otherInfo.length > 200) {
     return "최대 200자까지 입력 가능합니다.";
   }
-  return;
+  return null;
 };
 
 const validPhoneNumber = (phoneNumber) => {
@@ -61,6 +61,7 @@ const validPhoneNumber = (phoneNumber) => {
   if (!/^([0-9]+)$/.test(phoneNumber)) {
     return "숫자만 입력 가능합니다.";
   }
+  return null;
 };
 
 // 현재 onChange가 일어나는 input창에서만 경고 메세지를 띄우고 싶어 current로 현재 input이 일어나는 태그를 표시했습니다.

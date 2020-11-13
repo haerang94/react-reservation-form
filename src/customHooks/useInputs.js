@@ -14,7 +14,6 @@ function useInputs() {
     (e) => {
       e.persist();
       const { name, value } = e.target;
-      console.log(name, value);
       const newValues = { ...info, [name]: value };
 
       const newErrors = valid(newValues, name, info_errors);
@@ -27,12 +26,14 @@ function useInputs() {
   const onSubmit = useCallback(
     (e) => {
       e.persist();
-      dispatch(setInfoErrors(valid(info, null, info_errors)));
-
-      if (info_errors === {}) {
-        alert("결제");
-      } else {
+      const newErrors = valid(info, null, info_errors);
+      dispatch(setInfoErrors(newErrors));
+      for (const value of Object.values(newErrors)) {
+        if (value) {
+          return;
+        }
       }
+      alert("예약이 완료되었습니다.");
     },
     [info, dispatch, info_errors]
   );
