@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { valid } from "utils/validation";
 import { setInfo, setInfoErrors } from "modules/info";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,16 +8,19 @@ function useInputs() {
     info: state.info.info,
     info_errors: state.info.info_errors,
   }));
+
   const dispatch = useDispatch();
 
   const onChange = useCallback(
-    (e) => {
+    (idx, e) => {
       e.persist();
       const { name, value } = e.target;
-      const newValues = { ...info, [name]: value };
-
-      const newErrors = valid(newValues, name, info_errors);
-      dispatch(setInfo(newValues));
+      const newInfo = [...info];
+      newInfo[idx] = { ...info[idx], [name]: value };
+      const newErrors = [...info_errors];
+      const temp = valid(newInfo[idx], name, info_errors[idx]);
+      newErrors[idx] = temp;
+      dispatch(setInfo(newInfo));
       dispatch(setInfoErrors(newErrors));
     },
     [info, dispatch, info_errors]
