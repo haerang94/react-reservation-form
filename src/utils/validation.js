@@ -51,9 +51,32 @@ const validOtherInfo = (otherInfo) => {
   return;
 };
 
+const validPhoneNumber = (phoneNumber) => {
+  if (!phoneNumber || phoneNumber.length < 2) {
+    return "최소 2자 이상 입력해주세요.";
+  }
+  if (phoneNumber.length > 20) {
+    return "최대 20자까지 입력 가능합니다.";
+  }
+  if (!/^([0-9]+)$/.test(phoneNumber)) {
+    return "숫자만 입력 가능합니다.";
+  }
+};
+
 const valid = (
   current,
-  { firstName, lastName, koreanName, gender, birthdate, username, otherInfo },
+  {
+    firstName,
+    lastName,
+    koreanName,
+    gender,
+    birthdate,
+    username,
+    otherInfo,
+    phoneNumber,
+    hour,
+    minute,
+  },
   checked
 ) => {
   const errors = {};
@@ -71,6 +94,14 @@ const valid = (
     errors.username = validEnglishName(username);
   } else if (current === "otherInfo") {
     errors.otherInfo = validOtherInfo(otherInfo);
+  } else if (current === "phoneNumber") {
+    errors.phoneNumber = validPhoneNumber(phoneNumber);
+  } else if (current === "hour") {
+    if (hour === "시") errors.hour = "시간을 선택해주세요.";
+    else errors.hour = null;
+  } else if (current === "minute") {
+    if (minute === "분") errors.minute = "분을 선택해주세요.";
+    else errors.minute = null;
   }
   return errors;
 };

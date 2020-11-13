@@ -89,8 +89,6 @@ const ButtonContainer = styled.div`
 `;
 
 const Traveler = ({ values, errors, onChange, reset, idx }) => {
-  console.log(errors.firstName);
-  const firstName = errors.firstName;
   return (
     <TraverlerWrapper>
       <TravelerNumber>
@@ -101,7 +99,7 @@ const Traveler = ({ values, errors, onChange, reset, idx }) => {
         예약하시는 모든 분의 정보를 여권 상과 동일하게 기입해 주시게 바랍니다.
       </Notice>
       <FlexContainer>
-        <TwoInputs firstName={firstName}>
+        <TwoInputs>
           <header>영문 이름</header>
           <Input
             type="text"

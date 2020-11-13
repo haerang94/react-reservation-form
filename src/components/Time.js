@@ -40,14 +40,20 @@ const SelectGroup = styled.div`
   }
 `;
 
-const Time = () => {
+const Time = ({ values, errors, onChange }) => {
   return (
     <TimeWrapper>
       <header>숙소 도착 예정 시간</header>
       <FlexWrapper>
         <SelectGroup>
-          <select name="hour" id="hour" defaultValue={"default"}>
-            <option value="default" disabled>
+          <select
+            name="hour"
+            id="hour"
+            value={values.hour || "시"}
+            onChange={onChange}
+            alert={errors.hour}
+          >
+            <option value="시" disabled>
               시
             </option>
             {Array(24)
@@ -56,23 +62,25 @@ const Time = () => {
                 <option key={`hour-${idx}`} value={idx}>{`${idx}시`}</option>
               ))}
           </select>
-          <Alert>시간을 선택해주세요.</Alert>
+          {errors.hour && <Alert>{errors.hour}</Alert>}
         </SelectGroup>
         <SelectGroup>
-          <select name="minute" id="minute" defaultValue={"default"}>
-            <option value="default" disabled>
+          <select
+            name="minute"
+            id="minute"
+            value={values.minute || "분"}
+            onChange={onChange}
+          >
+            <option value="분" disabled>
               분
             </option>
             {Array(60)
               .fill(0)
               .map((item, idx) => (
-                <option
-                  key={`minute-${idx}`}
-                  value={idx * 10}
-                >{`${idx}분`}</option>
+                <option key={`minute-${idx}`} value={idx}>{`${idx}분`}</option>
               ))}
           </select>
-          <Alert>분을 선택해주세요.</Alert>
+          {errors.minute && <Alert>{errors.minute}</Alert>}
         </SelectGroup>
       </FlexWrapper>
     </TimeWrapper>

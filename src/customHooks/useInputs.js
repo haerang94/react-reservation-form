@@ -8,6 +8,7 @@ function useInputs(initialForm) {
     (e) => {
       e.persist();
       const { name, value, checked } = e.target;
+      console.log(name, value);
       const newValues = { ...values, [name]: value };
       setValues((values) => ({ ...values, [name]: value }));
       setErrors(valid(name, newValues, checked));

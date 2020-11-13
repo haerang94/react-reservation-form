@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Alert } from "components/SharedComponents";
+import { Alert, Input } from "components/SharedComponents";
 
 const ContactWrapper = styled.section`
   width: 100%;
@@ -21,13 +21,6 @@ const FlexContainer = styled.div`
   width: 100%;
   justify-content: space-between;
 
-  & input[type="text"] {
-    width: 60%;
-    padding: 10px;
-    height: 30px;
-    border: 1px solid ${(props) => props.theme.color.lightGray};
-    border-radius: 5px;
-  }
   & select {
     width: 38%;
     padding-left: 7px;
@@ -38,6 +31,10 @@ const FlexContainer = styled.div`
   & select:hover {
     cursor: pointer;
   }
+
+  & > div {
+    width: 60%;
+  }
 `;
 
 const PhoneNumber = styled.div`
@@ -47,14 +44,6 @@ const PhoneNumber = styled.div`
     font-size: ${(props) => props.theme.size.mmd};
     margin-bottom: 8px;
     padding-left: 2px;
-  }
-
-  & input {
-    padding: 10px;
-    height: 30px;
-    width: 100%;
-    border: 1px solid ${(props) => props.theme.color.lightGray};
-    border-radius: 5px;
   }
 `;
 
@@ -68,12 +57,13 @@ const ContactInfo = ({ values, onChange, reset, errors }) => {
       <header>상세 핸드폰 정보</header>
       <Name>
         <header>사용자 이름</header>
-        <input
+        <Input
           type="text"
           placeholder="홍길동"
           name="username"
           onChange={onChange}
           value={values.username || ""}
+          alert={errors.username}
         />
         {errors.username && <Alert>{errors.username}</Alert>}
       </Name>
@@ -83,14 +73,17 @@ const ContactInfo = ({ values, onChange, reset, errors }) => {
           <select name="hour" id="hour">
             <option value="82">+82(대한민국)</option>
           </select>
-          <input
-            type="text"
-            placeholder="'-'없이 입력해 주세요."
-            name="phoneNumber"
-            value={values.phoneNumber || ""}
-            onChange={onChange}
-          />
-          {errors.phoneNumber && <Alert>{errors.phoneNumber}</Alert>}
+          <div>
+            <Input
+              type="text"
+              placeholder="'-'없이 입력해 주세요."
+              name="phoneNumber"
+              value={values.phoneNumber || ""}
+              onChange={onChange}
+              alert={errors.phoneNumber}
+            />
+            {errors.phoneNumber && <Alert>{errors.phoneNumber}</Alert>}
+          </div>
         </FlexContainer>
       </PhoneNumber>
     </ContactWrapper>
