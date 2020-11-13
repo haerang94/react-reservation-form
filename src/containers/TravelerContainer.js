@@ -10,7 +10,7 @@ const TravelerContainer = React.memo(() => {
         values={values}
         onChange={onChange}
         errors={errors}
-        cnt={1}
+        cnt={values.length}
         focus={focus}
       ></TravelerList>
     </div>

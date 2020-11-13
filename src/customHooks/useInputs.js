@@ -44,15 +44,23 @@ function useInputs() {
 
       for (const [key, value] of Object.entries(newErrors)) {
         for (const [k, v] of Object.entries(value)) {
-          if (key === "1") continue;
+          if (k === "hour") break;
+          // if (key === "1") continue;
           if (v) {
             console.log(key, k);
             dispatch(setFocus([key, k]));
-
             return;
           }
         }
       }
+
+      for (const [k, v] of Object.entries(newErrors[0])) {
+        if (v) {
+          dispatch(setFocus([0, k]));
+          return;
+        }
+      }
+
       alert("예약이 완료되었습니다.");
     },
     [info, dispatch, info_errors]
