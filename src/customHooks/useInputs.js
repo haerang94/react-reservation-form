@@ -1,12 +1,13 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { valid } from "utils/validation";
-import { setInfo, setInfoErrors } from "modules/info";
+import { setInfo, setInfoErrors, setFocus } from "modules/info";
 import { useSelector, useDispatch } from "react-redux";
 
 function useInputs() {
-  const { info, info_errors } = useSelector((state) => ({
+  const { info, info_errors, focus } = useSelector((state) => ({
     info: state.info.info,
     info_errors: state.info.info_errors,
+    focus: state.info.focus,
   }));
 
   const dispatch = useDispatch();
@@ -41,9 +42,12 @@ function useInputs() {
 
       dispatch(setInfoErrors(newErrors));
 
-      for (const value of Object.values(newErrors)) {
-        for (const v of Object.values(value)) {
+      for (const [key, value] of Object.entries(newErrors)) {
+        for (const [k, v] of Object.entries(value)) {
           if (v) {
+            console.log(key, k);
+            dispatch(setFocus([key, k]));
+
             return;
           }
         }
@@ -53,7 +57,7 @@ function useInputs() {
     [info, dispatch, info_errors]
   );
 
-  return [info, onChange, info_errors, onSubmit];
+  return [info, onChange, info_errors, onSubmit, focus];
 }
 
 export default useInputs;

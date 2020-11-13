@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { Alert, Input } from "components/SharedComponents";
 
@@ -93,7 +93,28 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const Traveler = React.memo(({ values, errors, onChange, idx }) => {
+const Traveler = React.memo(({ values, errors, onChange, idx, focus }) => {
+  const firstRef = useRef();
+  const lastRef = useRef();
+  const koreanRef = useRef();
+  const genderRef = useRef();
+  const birthdateRef = useRef();
+  useEffect(() => {
+    console.log(focus);
+    const [num, target] = focus;
+    if (+num === idx) {
+      if (target === "firstName") {
+        firstRef.current.focus();
+      } else if (target === "lastName") {
+        lastRef.current.focus();
+      } else if (target === "koreanName") {
+        koreanRef.current.focus();
+      } else if (target === "birthdate") {
+        birthdateRef.current.focus();
+      }
+    }
+  }, [errors, idx, focus]);
+
   return (
     <TraverlerWrapper>
       <TravelerNumber>
@@ -113,6 +134,7 @@ const Traveler = React.memo(({ values, errors, onChange, idx }) => {
             value={values[idx].firstName || ""}
             onChange={(e) => onChange(idx, e)}
             alert={errors[idx].firstName}
+            ref={firstRef}
           />
           {errors[idx].firstName && <Alert>{errors[idx].firstName}</Alert>}
         </TwoInputs>
@@ -125,6 +147,7 @@ const Traveler = React.memo(({ values, errors, onChange, idx }) => {
             value={values[idx].lastName || ""}
             onChange={(e) => onChange(idx, e)}
             alert={errors[idx].lastName}
+            ref={lastRef}
           />
           {errors[idx].lastName && <Alert>{errors[idx].lastName}</Alert>}
         </TwoInputs>
@@ -138,6 +161,7 @@ const Traveler = React.memo(({ values, errors, onChange, idx }) => {
           value={values[idx].koreanName || ""}
           onChange={(e) => onChange(idx, e)}
           alert={errors[idx].koreanName}
+          ref={koreanRef}
         />
         {errors[idx].koreanName && <Alert>{errors[idx].koreanName}</Alert>}
       </OneInput>
@@ -151,6 +175,7 @@ const Traveler = React.memo(({ values, errors, onChange, idx }) => {
             value={"남"}
             onChange={(e) => onChange(idx, e)}
             alert={errors[idx].gender}
+            ref={genderRef}
           />
           <Label htmlFor={`male-${idx}`} alert={errors[idx].gender}>
             남
@@ -178,6 +203,7 @@ const Traveler = React.memo(({ values, errors, onChange, idx }) => {
           onChange={(e) => onChange(idx, e)}
           name="birthdate"
           alert={errors[idx].birthdate}
+          ref={birthdateRef}
         />
         {errors[idx].birthdate && <Alert>{errors[idx].birthdate}</Alert>}
       </OneInput>

@@ -1,7 +1,7 @@
 import React from "react";
 import Traveler from "components/Traveler";
 
-const TraverlerList = ({ values, errors, onChange, cnt }) => {
+const TraverlerList = ({ values, errors, onChange, cnt, focus }) => {
   return (
     <>
       {Array(cnt)
@@ -13,6 +13,7 @@ const TraverlerList = ({ values, errors, onChange, cnt }) => {
             errors={errors}
             onChange={onChange}
             idx={idx}
+            focus={focus}
           />
         ))}
     </>
