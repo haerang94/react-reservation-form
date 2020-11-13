@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import { Alert } from "components/SharedComponents";
 
@@ -42,7 +42,18 @@ const SelectGroup = styled.div`
   flex-direction: column;
 `;
 
-const Time = ({ values, errors, onChange }) => {
+const Time = ({ values, errors, onChange, focus }) => {
+  const hourRef = useRef();
+  const minuteRef = useRef();
+  useEffect(() => {
+    const [, target] = focus;
+
+    if (target === "hour") {
+      hourRef.current.scrollIntoView();
+    } else if (target === "minute") {
+      minuteRef.current.scrollIntoView();
+    }
+  }, [focus]);
   return (
     <TimeWrapper>
       <header>숙소 도착 예정 시간</header>
@@ -54,6 +65,7 @@ const Time = ({ values, errors, onChange }) => {
             value={values[0].hour || "시"}
             onChange={(e) => onChange(0, e)}
             alert={errors[0].hour}
+            ref={hourRef}
           >
             <option value="시" disabled>
               시
@@ -73,6 +85,7 @@ const Time = ({ values, errors, onChange }) => {
             value={values[0].minute || "분"}
             onChange={(e) => onChange(0, e)}
             alert={errors[0].minute}
+            ref={minuteRef}
           >
             <option value="분" disabled>
               분
