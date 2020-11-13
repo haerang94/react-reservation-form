@@ -10,7 +10,7 @@ const TravelerContainer = () => {
         values={values}
         onChange={onChange}
         errors={errors}
-        cnt={2}
+        cnt={values.length}
       ></TravelerList>
     </div>
   );
