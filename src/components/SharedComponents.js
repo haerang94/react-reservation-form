@@ -9,4 +9,14 @@ const Alert = styled.div`
   padding-left: 3px;
 `;
 
-export { Alert };
+const Input = styled.input`
+  padding: 10px;
+  height: 30px;
+  width: 100%;
+  border: 1px solid
+    ${(props) =>
+      props.alert ? props.theme.color.carrot : props.theme.color.lightGray};
+  border-radius: 5px;
+`;
+
+export { Alert, Input };

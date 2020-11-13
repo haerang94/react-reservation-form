@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Alert } from "components/SharedComponents";
+import { Alert, Input } from "components/SharedComponents";
 
 const TraverlerWrapper = styled.section`
   width: 100%;
@@ -38,19 +38,12 @@ const FlexContainer = styled.div`
 
 const TwoInputs = styled.div`
   width: 49%;
+
   & header {
     font-weight: bold;
     font-size: ${(props) => props.theme.size.mmd};
     margin-bottom: 8px;
     padding-left: 2px;
-  }
-  & input {
-    padding: 10px;
-    height: 30px;
-    width: 100%;
-    border: 1px solid
-      ${(props) => (props.flag ? props.flag : props.theme.color.lightGray)};
-    border-radius: 5px;
   }
 `;
 
@@ -97,6 +90,7 @@ const ButtonContainer = styled.div`
 
 const Traveler = ({ values, errors, onChange, reset, idx }) => {
   console.log(errors.firstName);
+  const firstName = errors.firstName;
   return (
     <TraverlerWrapper>
       <TravelerNumber>
@@ -107,39 +101,40 @@ const Traveler = ({ values, errors, onChange, reset, idx }) => {
         예약하시는 모든 분의 정보를 여권 상과 동일하게 기입해 주시게 바랍니다.
       </Notice>
       <FlexContainer>
-        <TwoInputs>
+        <TwoInputs firstName={firstName}>
           <header>영문 이름</header>
-          <input
+          <Input
             type="text"
             placeholder="Gil Dong"
             name="firstName"
             value={values.firstName || ""}
             onChange={onChange}
+            alert={errors.firstName}
           />
           {errors.firstName && <Alert>{errors.firstName}</Alert>}
         </TwoInputs>
         <TwoInputs>
           <header>영문 성</header>
-          <input
+          <Input
             type="text"
             placeholder="Hong"
             name="lastName"
             value={values.lastName || ""}
             onChange={onChange}
-            error={errors.lastName || ""}
+            alert={errors.lastName}
           />
           {errors.lastName && <Alert>{errors.lastName}</Alert>}
         </TwoInputs>
       </FlexContainer>
       <OneInput>
         <header>한글 이름</header>
-        <input
+        <Input
           type="text"
           placeholder="홍길동"
           name="koreanName"
           value={values.koreanName || ""}
           onChange={onChange}
-          error={errors.koreanName || ""}
+          alert={errors.koreanName}
         />
         {errors.koreanName && <Alert>{errors.koreanName}</Alert>}
       </OneInput>
@@ -152,7 +147,7 @@ const Traveler = ({ values, errors, onChange, reset, idx }) => {
             id={`male-${idx}`}
             value={values.gender || ""}
             onChange={onChange}
-            error={errors.gender || ""}
+            alert={errors.gender}
           />
           <label htmlFor={`male-${idx}`}>남</label>
           <input
@@ -161,7 +156,7 @@ const Traveler = ({ values, errors, onChange, reset, idx }) => {
             id={`female-${idx}`}
             value={values.gender || ""}
             onChange={onChange}
-            error={errors.gender || ""}
+            alert={errors.gender}
           />
           <label htmlFor={`female-${idx}`}>여</label>
         </ButtonContainer>
@@ -169,13 +164,13 @@ const Traveler = ({ values, errors, onChange, reset, idx }) => {
       </OneInput>
       <OneInput>
         <header>생년월일</header>
-        <input
+        <Input
           type="text"
           placeholder="YYMMDD"
           value={values.birthdate || ""}
           onChange={onChange}
           name="birthdate"
-          error={errors.birthdate || ""}
+          alert={errors.birthdate}
         />
         {errors.birthdate && <Alert>{errors.birthdate}</Alert>}
       </OneInput>
