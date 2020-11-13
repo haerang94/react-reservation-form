@@ -91,7 +91,8 @@ const SubmitBtn = styled.button`
   }
 `;
 
-const Terms = ({ values, onClick, checked }) => {
+const Terms = ({ values, onChange }) => {
+  console.log(values);
   return (
     <TermsWrapper>
       <header>약관 동의</header>
@@ -101,7 +102,8 @@ const Terms = ({ values, onClick, checked }) => {
         name="allTerms"
         id="allTerms"
         value={values.allTerms || ""}
-        onClick={onClick}
+        onChange={onChange}
+        checked={values.allTerms}
       />
       <label htmlFor="allTerms">전체 약관 동의</label>
 
@@ -111,7 +113,8 @@ const Terms = ({ values, onClick, checked }) => {
           name="travelerTerm"
           id="travelerTerm"
           value={values.travelerTerm || ""}
-          onClick={onClick}
+          onChange={onChange}
+          checked={values.travelerTerm}
         />
         <label htmlFor="travelerTerm">여행자 약관 동의 (필수)</label>
         <input
@@ -119,7 +122,8 @@ const Terms = ({ values, onClick, checked }) => {
           name="bargainTerm"
           id="bargainTerm"
           value={values.bargainTerm}
-          onClick={onClick}
+          onChange={onChange}
+          checked={values.bargainTerm}
         />
         <label htmlFor="bargainTerm">
           특가 항공권 및 할인 혜택 안내 동의 (선택)
