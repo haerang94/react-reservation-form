@@ -108,6 +108,4 @@ const valid = (
   return errors;
 };
 
-const validSubmit = () => {};
-
-export { valid, validSubmit };
+export { valid };

@@ -1,9 +1,12 @@
 import React from "react";
 import ContactInfo from "components/ContactInfo";
 import useInputs from "customHooks/useInputs";
-
+import { useSelector } from "react-redux";
 const ContactInfoContainer = () => {
-  const [values, onChange, errors] = useInputs();
+  const { info } = useSelector((state) => ({
+    info: state.info.info,
+  }));
+  const [values, onChange, errors] = useInputs(info);
 
   return (
     <ContactInfo
