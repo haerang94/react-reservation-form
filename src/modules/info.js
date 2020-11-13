@@ -11,6 +11,23 @@ const SET_FOCUS = "info/FOCUS";
 // 시간, 분, 기타 정보의 기준은 idx가 0인 곳 기준으로 한다
 // info는 사용자 정보를 나타낸다
 // info_errors는 유효성 검사를 통과하지 못한 부분의 메세지를 담는 곳이다
+//  사용자를 추가하고 싶다면 info에
+// {
+//   firstName: null,
+//   lastName: null,
+//   koreanName: null,
+//   gender: null,
+//   birthdate: null,
+// },
+// info_errors에  {
+//       firstName: null,
+//       lastName: null,
+//       koreanName: null,
+//       gender: null,
+//       birthdate: null,
+//       hour: null,
+//       minute: null,
+//     }를 추가하면 됩니다
 const initialState = {
   info: [
     {

@@ -15,7 +15,7 @@ function useCheckboxes() {
       // 리액트의 e객체는 syntheticevent로 비동기 처리시 null값이 되어 경고나타남
       // e.persist()로 해결
       e.persist();
-      const { name, value } = e.target;
+      const { name } = e.target;
       // 현재 체크박스를 토글하여 새 객체를 생성
       const newValues = { ...values, [name]: !values[name] };
       // 경우에 따라서 체크박스를 토글해주는 기능 구현한 checkingTerms로 바뀌는 부분 적용
