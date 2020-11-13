@@ -35,11 +35,11 @@ const Transportation = styled.div`
     padding-left: 2px;
   }
 `;
-
+// 기타 예약 정보 컴포넌트
 const OtherInfo = React.memo(({ values, onChange, errors, focus }) => {
   const otherInfoRef = useRef();
+  // target이 유효성 검사를 통과하지 못한 처음 부분이며 해당 위치로 이동한다
   useEffect(() => {
-    console.log(focus);
     const [, target] = focus;
     if (target === "otherInfo") {
       otherInfoRef.current.focus();
@@ -51,7 +51,7 @@ const OtherInfo = React.memo(({ values, onChange, errors, focus }) => {
       <Transportation>
         <header>오시는 교통 수단을 적어주세요.</header>
         <Textarea
-          placeholder="답변을 인력해 주세요."
+          placeholder="답변을 입력해 주세요."
           value={values[0].otherInfo || ""}
           name="otherInfo"
           onChange={(e) => onChange(0, e)}

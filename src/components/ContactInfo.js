@@ -50,14 +50,15 @@ const PhoneNumber = styled.div`
 const Name = styled(PhoneNumber)`
   width: 100%;
 `;
-
+//  프레젠테이셔널 컴포넌트. 스타일 정보를 가지며 부모로부터 받은 props로 렌더링
+// 상세 핸드폰 정보 컴포넌트
 const ContactInfo = React.memo(({ values, onChange, errors, focus }) => {
   const userNameRef = useRef();
   const phoneNumberRef = useRef();
-  useEffect(() => {
-    console.log(focus);
-    const [, target] = focus;
 
+  // 가장 처음 focus가 걸리는 부분이 target이고 해당 부분으로 포커스가 잡힌다
+  useEffect(() => {
+    const [, target] = focus;
     if (target === "username") {
       userNameRef.current.focus();
     } else if (target === "phoneNumber") {

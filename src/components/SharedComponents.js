@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+// 공통적으로 사용되는 컴포넌트
 const Alert = styled.div`
   height: 20px;
   width: 100%;

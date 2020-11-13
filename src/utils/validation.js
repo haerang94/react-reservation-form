@@ -1,3 +1,5 @@
+// 유효성 검사를 담당하는 함수 모음
+
 const validEnglishName = (name) => {
   if (!name || name.length < 2) {
     return "최소 2자 이상 입력해주세요.";
@@ -83,6 +85,7 @@ const valid = (
   info_errors,
   idx
 ) => {
+  // 결제하기 버튼을 눌러 전체를 검사하거나 현재 input하는 위치에 해당하는 요소 검사
   const errors = { ...info_errors };
   if (!current || current === "firstName") {
     errors.firstName = validEnglishName(firstName);
@@ -100,13 +103,14 @@ const valid = (
     errors.birthdate = validBirthdate(birthdate);
   }
   if (!current || current === "hour") {
-    if (hour === "시") errors.hour = "시간을 선택해주세요.";
+    if (hour === "시") errors.hour = "숙소 도착 예정 시간을 선택해주세요.";
     else errors.hour = null;
   }
   if (!current || current === "minute") {
-    if (minute === "분") errors.minute = "분을 선택해주세요.";
+    if (minute === "분") errors.minute = "숙소 도착 예정 시간을 선택해주세요.";
     else errors.minute = null;
   }
+  // 아래 세 요소는 index 0에만 존재하는 공통 정보이다
   if ((!idx && !current) || current === "username") {
     errors.username = validEnglishName(username);
   }

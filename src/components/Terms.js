@@ -74,7 +74,7 @@ const SubmitBtn = styled.button`
     cursor: ${(props) => (props.disabled ? "default" : "pointer")};
   }
 `;
-
+// 약관 정보 컴포넌트
 const Terms = React.memo(({ values, onChange, onSubmit }) => {
   return (
     <TermsWrapper>
