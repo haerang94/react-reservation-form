@@ -41,10 +41,11 @@ const SelectGroup = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
+// 시간 정보 컴포넌트
 const Time = React.memo(({ values, errors, onChange, focus }) => {
   const hourRef = useRef();
   const minuteRef = useRef();
+  // 유효성 검사를 통과하지 못한 부분으로 이동한다
   useEffect(() => {
     const [, target] = focus;
 

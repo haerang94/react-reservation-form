@@ -1,6 +1,8 @@
 import React from "react";
 import Traveler from "components/Traveler";
 
+// 총 여행자의 수만큼 traveler 컴포넌트를 가진다
+// cnt는 전역 상태의 info배열의 크기
 const TraverlerList = React.memo(({ values, errors, onChange, cnt, focus }) => {
   return (
     <>

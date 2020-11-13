@@ -92,15 +92,15 @@ const ButtonContainer = styled.div`
     }
   }
 `;
-
+//  각각의 여행자 정보 컴포넌트. idx는 0으로 시작
 const Traveler = React.memo(({ values, errors, onChange, idx, focus }) => {
   const firstRef = useRef();
   const lastRef = useRef();
   const koreanRef = useRef();
   const genderRef = useRef();
   const birthdateRef = useRef();
+  // 유효성 검사를 통과하지 못한 부분으로 이동
   useEffect(() => {
-    console.log(focus);
     const [num, target] = focus;
     if (+num === idx) {
       if (target === "firstName") {
