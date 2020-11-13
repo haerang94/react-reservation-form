@@ -103,11 +103,11 @@ const valid = (
     errors.birthdate = validBirthdate(birthdate);
   }
   if (!current || current === "hour") {
-    if (hour === "시") errors.hour = "시간을 선택해주세요.";
+    if (hour === "시") errors.hour = "숙소 도착 예정 시간을 선택해주세요.";
     else errors.hour = null;
   }
   if (!current || current === "minute") {
-    if (minute === "분") errors.minute = "분을 선택해주세요.";
+    if (minute === "분") errors.minute = "숙소 도착 예정 시간을 선택해주세요.";
     else errors.minute = null;
   }
   // 아래 세 요소는 index 0에만 존재하는 공통 정보이다

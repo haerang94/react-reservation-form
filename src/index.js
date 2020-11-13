@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import rootReducer from "modules";
 
 const store = createStore(rootReducer);
-
+//  전역 상태관리로 redux 사용
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

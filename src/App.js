@@ -4,6 +4,7 @@ import reset from "styled-reset";
 import theme from "styles/theme";
 import Reservation from "pages/Reservation";
 
+// styled components reset style, 폰트, global style 적용
 const GlobalStyle = createGlobalStyle`
     ${reset}
     *{
