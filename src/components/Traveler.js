@@ -109,6 +109,8 @@ const Traveler = React.memo(({ values, errors, onChange, idx, focus }) => {
         lastRef.current.focus();
       } else if (target === "koreanName") {
         koreanRef.current.focus();
+      } else if (target === "gender") {
+        genderRef.current.scrollIntoView();
       } else if (target === "birthdate") {
         birthdateRef.current.focus();
       }
@@ -166,7 +168,7 @@ const Traveler = React.memo(({ values, errors, onChange, idx, focus }) => {
         {errors[idx].koreanName && <Alert>{errors[idx].koreanName}</Alert>}
       </OneInput>
       <OneInput>
-        <header>성별</header>
+        <header ref={genderRef}>성별</header>
         <ButtonContainer>
           <input
             type="radio"
@@ -175,7 +177,6 @@ const Traveler = React.memo(({ values, errors, onChange, idx, focus }) => {
             value={"남"}
             onChange={(e) => onChange(idx, e)}
             alert={errors[idx].gender}
-            ref={genderRef}
           />
           <Label htmlFor={`male-${idx}`} alert={errors[idx].gender}>
             남
