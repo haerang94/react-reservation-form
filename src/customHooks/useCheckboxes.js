@@ -1,22 +1,22 @@
 import { useState, useCallback } from "react";
-import valid from "utils/validation";
-function useInputs(initialForm) {
+import checkTerms from "utils/termsCheck";
+function useCheckboxes(initialForm) {
   const [values, setValues] = useState({});
-  const [errors, setErrors] = useState({});
+  const [checked, setChecked] = useState({});
 
-  const onChange = useCallback(
+  const onClick = useCallback(
     (e) => {
-      e.persist();
+      // e.persist();
       const { name, value, checked } = e.target;
       console.log(name, value, checked);
       const newValues = { ...values, [name]: value };
       setValues((values) => ({ ...values, [name]: value }));
-      setErrors(valid(name, newValues, checked));
+      // setChecked(checkTerms(name, newValues, checked));
     },
     [values]
   );
   const reset = useCallback(() => setValues(initialForm), [initialForm]);
-  return [values, onChange, reset, errors];
+  return [values, onClick, reset, checked];
 }
 
-export default useInputs;
+export default useCheckboxes;

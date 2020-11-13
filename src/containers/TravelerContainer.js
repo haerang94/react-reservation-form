@@ -4,7 +4,6 @@ import useInputs from "customHooks/useInputs";
 
 const TravelerContainer = () => {
   const [values, onChange, reset, errors] = useInputs();
-
   return (
     <div>
       <Traveler

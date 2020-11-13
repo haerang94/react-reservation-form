@@ -15,6 +15,17 @@ const OtherInfoWrapper = styled.section`
   border-bottom: 10px solid ${(props) => props.theme.color.lightGray};
 `;
 
+const Textarea = styled.textarea`
+  padding: 10px;
+  height: 100px;
+  width: 100%;
+  border: 1px solid
+    ${(props) =>
+      props.alert ? props.theme.color.carrot : props.theme.color.lightGray};
+  border-radius: 5px;
+  resize: none;
+`;
+
 const Transportation = styled.div`
   width: 100%;
   & header {
@@ -22,15 +33,6 @@ const Transportation = styled.div`
     font-size: ${(props) => props.theme.size.mmd};
     margin-bottom: 8px;
     padding-left: 2px;
-  }
-
-  & textarea {
-    padding: 10px;
-    height: 100px;
-    width: 100%;
-    border: 1px solid ${(props) => props.theme.color.lightGray};
-    border-radius: 5px;
-    resize: none;
   }
 `;
 
@@ -40,12 +42,13 @@ const OtherInfo = ({ values, onChange, reset, errors }) => {
       <header>기타 예약 정보</header>
       <Transportation>
         <header>오시는 교통 수단을 적어주세요.</header>
-        <textarea
+        <Textarea
           placeholder="답변을 인력해 주세요."
           value={values.otherInfo || ""}
           name="otherInfo"
           onChange={onChange}
-        ></textarea>
+          alert={errors.otherInfo}
+        ></Textarea>
         {errors.otherInfo && <Alert>{errors.otherInfo}</Alert>}
       </Transportation>
     </OtherInfoWrapper>
