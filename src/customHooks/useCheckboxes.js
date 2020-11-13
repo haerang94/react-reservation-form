@@ -7,10 +7,7 @@ function useCheckboxes(initialForm) {
     (e) => {
       e.persist();
       const { name, value, checked } = e.target;
-      console.log(values);
-      console.log(name, value, checked);
       const newValues = { ...values, [name]: !values[name] };
-      console.log(newValues);
       setValues((values) => ({ ...values, [name]: value }));
       setValues(checkingTerms(name, newValues));
     },
