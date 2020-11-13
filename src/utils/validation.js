@@ -25,7 +25,7 @@ const validKorean = (name) => {
 };
 
 const validGender = (gender) => {
-  if (gender !== "여" || gender !== "남") {
+  if (gender !== "여" && gender !== "남") {
     return "성별을 선택해주세요.";
   }
   return;
