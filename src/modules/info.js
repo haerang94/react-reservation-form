@@ -22,8 +22,6 @@ const initialState = {
       koreanName: null,
       gender: null,
       birthdate: null,
-      hour: "시",
-      minute: "분",
     },
   ],
   info_errors: [

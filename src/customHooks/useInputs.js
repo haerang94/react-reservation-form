@@ -14,11 +14,15 @@ function useInputs() {
   const onChange = useCallback(
     (idx, e) => {
       e.persist();
-      const { name, value } = e.target;
+      let { name, value } = e.target;
+      if (name.slice(0, 6) === "gender") {
+        name = "gender";
+      }
       const newInfo = [...info];
       newInfo[idx] = { ...info[idx], [name]: value };
       const newErrors = [...info_errors];
-      const temp = valid(newInfo[idx], name, info_errors[idx]);
+
+      const temp = valid(newInfo[idx], name, info_errors[idx], idx);
       newErrors[idx] = temp;
       dispatch(setInfo(newInfo));
       dispatch(setInfoErrors(newErrors));
@@ -29,11 +33,19 @@ function useInputs() {
   const onSubmit = useCallback(
     (e) => {
       e.persist();
-      const newErrors = valid(info, null, info_errors);
+      const newErrors = [...info_errors];
+      for (let i = 0; i < info.length; i++) {
+        const temp = valid(info[i], null, info_errors[i], i);
+        newErrors[i] = temp;
+      }
+
       dispatch(setInfoErrors(newErrors));
+
       for (const value of Object.values(newErrors)) {
-        if (value) {
-          return;
+        for (const v of Object.values(value)) {
+          if (v) {
+            return;
+          }
         }
       }
       alert("예약이 완료되었습니다.");

@@ -80,7 +80,8 @@ const valid = (
     minute,
   },
   current,
-  info_errors
+  info_errors,
+  idx
 ) => {
   const errors = { ...info_errors };
   if (!current || current === "firstName") {
@@ -98,13 +99,13 @@ const valid = (
   if (!current || current === "birthdate") {
     errors.birthdate = validBirthdate(birthdate);
   }
-  if (!current || current === "username") {
+  if ((!idx && !current) || current === "username") {
     errors.username = validEnglishName(username);
   }
-  if (!current || current === "otherInfo") {
+  if ((!idx && !current) || current === "otherInfo") {
     errors.otherInfo = validOtherInfo(otherInfo);
   }
-  if (!current || current === "phoneNumber") {
+  if ((!idx && !current) || current === "phoneNumber") {
     errors.phoneNumber = validPhoneNumber(phoneNumber);
   }
   if (!current || current === "hour") {
