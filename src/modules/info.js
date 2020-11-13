@@ -10,6 +10,8 @@ const initialState = {
     koreanName: null,
     gender: null,
     birthdate: null,
+    hour: "시",
+    minute: "분",
   },
   info_errors: {
     firstName: null,
@@ -17,6 +19,8 @@ const initialState = {
     koreanName: null,
     gender: null,
     birthdate: null,
+    hour: null,
+    minute: null,
   },
 };
 

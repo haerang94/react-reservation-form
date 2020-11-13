@@ -51,6 +51,20 @@ const OneInput = styled(TwoInputs)`
   width: 100%;
 `;
 
+const Label = styled.label`
+  width: 50%;
+  font-size: ${(props) => props.theme.size.mmd};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border: 1px solid
+    ${(props) =>
+      props.alert ? props.theme.color.carrot : props.theme.color.lightGray};
+  border-radius: 5px;
+  height: 30px;
+`;
+
 const ButtonContainer = styled.div`
   display: flex;
   width: 100%;
@@ -58,17 +72,7 @@ const ButtonContainer = styled.div`
   & input[type="radio"] {
     display: none;
   }
-  & label {
-    width: 50%;
-    font-size: ${(props) => props.theme.size.mmd};
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    border: 1px solid ${(props) => props.theme.color.lightGray};
-    border-radius: 5px;
-    height: 30px;
-  }
+
   & label:nth-child(4) {
     border-radius: 0 5px 5px 0;
   }
@@ -78,10 +82,11 @@ const ButtonContainer = styled.div`
   & input[type="radio"] + label:hover {
     cursor: pointer;
   }
-  & input[type="radio"]:checked + label {
+  & input[type="radio"]:checked + ${Label} {
     border: 1px solid ${(props) => props.theme.color.blue};
     color: ${(props) => props.theme.color.blue};
-    background: ${(props) => props.theme.color.lightBlue};
+    background: ${(props) =>
+      props.alert ? props.theme.color.carrot : props.theme.color.lightBlue};
     & span {
       font-weight: bold;
     }
@@ -89,7 +94,6 @@ const ButtonContainer = styled.div`
 `;
 
 const Traveler = ({ values, errors, onChange, idx }) => {
-  // console.log("errors", errors);
   return (
     <TraverlerWrapper>
       <TravelerNumber>
@@ -148,7 +152,9 @@ const Traveler = ({ values, errors, onChange, idx }) => {
             onChange={onChange}
             alert={errors.gender}
           />
-          <label htmlFor={`male-${idx}`}>남</label>
+          <Label htmlFor={`male-${idx}`} alert={errors.gender}>
+            남
+          </Label>
           <input
             type="radio"
             name="gender"
@@ -157,7 +163,9 @@ const Traveler = ({ values, errors, onChange, idx }) => {
             onChange={onChange}
             alert={errors.gender}
           />
-          <label htmlFor={`female-${idx}`}>여</label>
+          <Label htmlFor={`female-${idx}`} alert={errors.gender}>
+            여
+          </Label>
         </ButtonContainer>
         {errors.gender && <Alert>{errors.gender}</Alert>}
       </OneInput>

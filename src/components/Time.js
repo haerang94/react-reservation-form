@@ -22,22 +22,24 @@ const FlexWrapper = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+const Select = styled.select`
+  width: 100%;
+  border: 1px solid
+    ${(props) =>
+      props.alert ? props.theme.color.carrot : props.theme.color.lightGray};
+  border-radius: 5px;
+  height: 30px;
+  padding: 0 7px;
+  color: gray;
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 const SelectGroup = styled.div`
   width: 49%;
   display: flex;
   flex-direction: column;
-  & select {
-    width: 100%;
-    border: 1px solid ${(props) => props.theme.color.lightGray};
-    border-radius: 5px;
-    height: 30px;
-    padding: 0 7px;
-    color: gray;
-  }
-  & select:hover {
-    cursor: pointer;
-  }
 `;
 
 const Time = ({ values, errors, onChange }) => {
@@ -46,7 +48,7 @@ const Time = ({ values, errors, onChange }) => {
       <header>숙소 도착 예정 시간</header>
       <FlexWrapper>
         <SelectGroup>
-          <select
+          <Select
             name="hour"
             id="hour"
             value={values.hour || "시"}
@@ -61,15 +63,16 @@ const Time = ({ values, errors, onChange }) => {
               .map((item, idx) => (
                 <option key={`hour-${idx}`} value={idx}>{`${idx}시`}</option>
               ))}
-          </select>
+          </Select>
           {errors.hour && <Alert>{errors.hour}</Alert>}
         </SelectGroup>
         <SelectGroup>
-          <select
+          <Select
             name="minute"
             id="minute"
             value={values.minute || "분"}
             onChange={onChange}
+            alert={errors.minute}
           >
             <option value="분" disabled>
               분
@@ -79,7 +82,7 @@ const Time = ({ values, errors, onChange }) => {
               .map((item, idx) => (
                 <option key={`minute-${idx}`} value={idx}>{`${idx}분`}</option>
               ))}
-          </select>
+          </Select>
           {errors.minute && <Alert>{errors.minute}</Alert>}
         </SelectGroup>
       </FlexWrapper>
