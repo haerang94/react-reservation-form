@@ -1,11 +1,11 @@
 import { useState, useCallback } from "react";
 import { valid } from "utils/validation";
-import { setInfo } from "modules/info";
+import { setInfo, setInfoErrors } from "modules/info";
 import { useDispatch } from "react-redux";
 
-function useInputs(initialState) {
+function useInputs(initialState, initialErrors) {
   const [values, setValues] = useState(initialState);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState(initialErrors);
   const dispatch = useDispatch();
 
   const onChange = useCallback(
@@ -17,6 +17,7 @@ function useInputs(initialState) {
       setValues((values) => ({ ...values, [name]: value }));
       setErrors(valid(name, newValues));
       dispatch(setInfo(newValues));
+      dispatch(setInfoErrors(valid(name, newValues)));
     },
     [values]
   );
