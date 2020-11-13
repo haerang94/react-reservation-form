@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import { Alert } from "components/SharedComponents";
 
@@ -42,7 +42,18 @@ const SelectGroup = styled.div`
   flex-direction: column;
 `;
 
-const Time = ({ values, errors, onChange }) => {
+const Time = React.memo(({ values, errors, onChange, focus }) => {
+  const hourRef = useRef();
+  const minuteRef = useRef();
+  useEffect(() => {
+    const [, target] = focus;
+
+    if (target === "hour") {
+      hourRef.current.scrollIntoView();
+    } else if (target === "minute") {
+      minuteRef.current.scrollIntoView();
+    }
+  }, [focus]);
   return (
     <TimeWrapper>
       <header>숙소 도착 예정 시간</header>
@@ -51,9 +62,10 @@ const Time = ({ values, errors, onChange }) => {
           <Select
             name="hour"
             id="hour"
-            value={values.hour || "시"}
-            onChange={onChange}
-            alert={errors.hour}
+            value={values[0].hour || "시"}
+            onChange={(e) => onChange(0, e)}
+            alert={errors[0].hour}
+            ref={hourRef}
           >
             <option value="시" disabled>
               시
@@ -64,15 +76,16 @@ const Time = ({ values, errors, onChange }) => {
                 <option key={`hour-${idx}`} value={idx}>{`${idx}시`}</option>
               ))}
           </Select>
-          {errors.hour && <Alert>{errors.hour}</Alert>}
+          {errors[0].hour && <Alert>{errors[0].hour}</Alert>}
         </SelectGroup>
         <SelectGroup>
           <Select
             name="minute"
             id="minute"
-            value={values.minute || "분"}
-            onChange={onChange}
-            alert={errors.minute}
+            value={values[0].minute || "분"}
+            onChange={(e) => onChange(0, e)}
+            alert={errors[0].minute}
+            ref={minuteRef}
           >
             <option value="분" disabled>
               분
@@ -83,11 +96,11 @@ const Time = ({ values, errors, onChange }) => {
                 <option key={`minute-${idx}`} value={idx}>{`${idx}분`}</option>
               ))}
           </Select>
-          {errors.minute && <Alert>{errors.minute}</Alert>}
+          {errors[0].minute && <Alert>{errors[0].minute}</Alert>}
         </SelectGroup>
       </FlexWrapper>
     </TimeWrapper>
   );
-};
+});
 
 export default Time;

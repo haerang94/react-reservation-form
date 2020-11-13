@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { Alert } from "components/SharedComponents";
 
@@ -36,7 +36,15 @@ const Transportation = styled.div`
   }
 `;
 
-const OtherInfo = ({ values, onChange, errors }) => {
+const OtherInfo = React.memo(({ values, onChange, errors, focus }) => {
+  const otherInfoRef = useRef();
+  useEffect(() => {
+    console.log(focus);
+    const [, target] = focus;
+    if (target === "otherInfo") {
+      otherInfoRef.current.focus();
+    }
+  }, [focus]);
   return (
     <OtherInfoWrapper>
       <header>기타 예약 정보</header>
@@ -44,15 +52,16 @@ const OtherInfo = ({ values, onChange, errors }) => {
         <header>오시는 교통 수단을 적어주세요.</header>
         <Textarea
           placeholder="답변을 인력해 주세요."
-          value={values.otherInfo || ""}
+          value={values[0].otherInfo || ""}
           name="otherInfo"
-          onChange={onChange}
-          alert={errors.otherInfo}
+          onChange={(e) => onChange(0, e)}
+          alert={errors[0].otherInfo}
+          ref={otherInfoRef}
         ></Textarea>
-        {errors.otherInfo && <Alert>{errors.otherInfo}</Alert>}
+        {errors[0].otherInfo && <Alert>{errors[0].otherInfo}</Alert>}
       </Transportation>
     </OtherInfoWrapper>
   );
-};
+});
 
 export default OtherInfo;

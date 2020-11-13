@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { Alert, Input } from "components/SharedComponents";
 
@@ -93,12 +93,35 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const Traveler = ({ values, errors, onChange, idx }) => {
+const Traveler = React.memo(({ values, errors, onChange, idx, focus }) => {
+  const firstRef = useRef();
+  const lastRef = useRef();
+  const koreanRef = useRef();
+  const genderRef = useRef();
+  const birthdateRef = useRef();
+  useEffect(() => {
+    console.log(focus);
+    const [num, target] = focus;
+    if (+num === idx) {
+      if (target === "firstName") {
+        firstRef.current.focus();
+      } else if (target === "lastName") {
+        lastRef.current.focus();
+      } else if (target === "koreanName") {
+        koreanRef.current.focus();
+      } else if (target === "gender") {
+        genderRef.current.scrollIntoView();
+      } else if (target === "birthdate") {
+        birthdateRef.current.focus();
+      }
+    }
+  }, [idx, focus]);
+
   return (
     <TraverlerWrapper>
       <TravelerNumber>
         <div>여행자</div>
-        <div>{idx}</div>
+        <div>{idx + 1}</div>
       </TravelerNumber>
       <Notice>
         예약하시는 모든 분의 정보를 여권 상과 동일하게 기입해 주시게 바랍니다.
@@ -110,11 +133,12 @@ const Traveler = ({ values, errors, onChange, idx }) => {
             type="text"
             placeholder="Gil Dong"
             name="firstName"
-            value={values.firstName || ""}
-            onChange={onChange}
-            alert={errors.firstName}
+            value={values[idx].firstName || ""}
+            onChange={(e) => onChange(idx, e)}
+            alert={errors[idx].firstName}
+            ref={firstRef}
           />
-          {errors.firstName && <Alert>{errors.firstName}</Alert>}
+          {errors[idx].firstName && <Alert>{errors[idx].firstName}</Alert>}
         </TwoInputs>
         <TwoInputs>
           <header>영문 성</header>
@@ -122,11 +146,12 @@ const Traveler = ({ values, errors, onChange, idx }) => {
             type="text"
             placeholder="Hong"
             name="lastName"
-            value={values.lastName || ""}
-            onChange={onChange}
-            alert={errors.lastName}
+            value={values[idx].lastName || ""}
+            onChange={(e) => onChange(idx, e)}
+            alert={errors[idx].lastName}
+            ref={lastRef}
           />
-          {errors.lastName && <Alert>{errors.lastName}</Alert>}
+          {errors[idx].lastName && <Alert>{errors[idx].lastName}</Alert>}
         </TwoInputs>
       </FlexContainer>
       <OneInput>
@@ -135,54 +160,56 @@ const Traveler = ({ values, errors, onChange, idx }) => {
           type="text"
           placeholder="홍길동"
           name="koreanName"
-          value={values.koreanName || ""}
-          onChange={onChange}
-          alert={errors.koreanName}
+          value={values[idx].koreanName || ""}
+          onChange={(e) => onChange(idx, e)}
+          alert={errors[idx].koreanName}
+          ref={koreanRef}
         />
-        {errors.koreanName && <Alert>{errors.koreanName}</Alert>}
+        {errors[idx].koreanName && <Alert>{errors[idx].koreanName}</Alert>}
       </OneInput>
       <OneInput>
-        <header>성별</header>
+        <header ref={genderRef}>성별</header>
         <ButtonContainer>
           <input
             type="radio"
-            name="gender"
+            name={`gender-${idx}`}
             id={`male-${idx}`}
             value={"남"}
-            onChange={onChange}
-            alert={errors.gender}
+            onChange={(e) => onChange(idx, e)}
+            alert={errors[idx].gender}
           />
-          <Label htmlFor={`male-${idx}`} alert={errors.gender}>
+          <Label htmlFor={`male-${idx}`} alert={errors[idx].gender}>
             남
           </Label>
           <input
             type="radio"
-            name="gender"
+            name={`gender-${idx}`}
             id={`female-${idx}`}
             value={"여"}
-            onChange={onChange}
-            alert={errors.gender}
+            onChange={(e) => onChange(idx, e)}
+            alert={errors[idx].gender}
           />
-          <Label htmlFor={`female-${idx}`} alert={errors.gender}>
+          <Label htmlFor={`female-${idx}`} alert={errors[idx].gender}>
             여
           </Label>
         </ButtonContainer>
-        {errors.gender && <Alert>{errors.gender}</Alert>}
+        {errors[idx].gender && <Alert>{errors[idx].gender}</Alert>}
       </OneInput>
       <OneInput>
         <header>생년월일</header>
         <Input
           type="text"
           placeholder="YYMMDD"
-          value={values.birthdate || ""}
-          onChange={onChange}
+          value={values[idx].birthdate || ""}
+          onChange={(e) => onChange(idx, e)}
           name="birthdate"
-          alert={errors.birthdate}
+          alert={errors[idx].birthdate}
+          ref={birthdateRef}
         />
-        {errors.birthdate && <Alert>{errors.birthdate}</Alert>}
+        {errors[idx].birthdate && <Alert>{errors[idx].birthdate}</Alert>}
       </OneInput>
     </TraverlerWrapper>
   );
-};
+});
 
 export default Traveler;

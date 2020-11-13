@@ -80,7 +80,8 @@ const valid = (
     minute,
   },
   current,
-  info_errors
+  info_errors,
+  idx
 ) => {
   const errors = { ...info_errors };
   if (!current || current === "firstName") {
@@ -98,15 +99,6 @@ const valid = (
   if (!current || current === "birthdate") {
     errors.birthdate = validBirthdate(birthdate);
   }
-  if (!current || current === "username") {
-    errors.username = validEnglishName(username);
-  }
-  if (!current || current === "otherInfo") {
-    errors.otherInfo = validOtherInfo(otherInfo);
-  }
-  if (!current || current === "phoneNumber") {
-    errors.phoneNumber = validPhoneNumber(phoneNumber);
-  }
   if (!current || current === "hour") {
     if (hour === "시") errors.hour = "시간을 선택해주세요.";
     else errors.hour = null;
@@ -115,6 +107,16 @@ const valid = (
     if (minute === "분") errors.minute = "분을 선택해주세요.";
     else errors.minute = null;
   }
+  if ((!idx && !current) || current === "username") {
+    errors.username = validEnglishName(username);
+  }
+  if ((!idx && !current) || current === "phoneNumber") {
+    errors.phoneNumber = validPhoneNumber(phoneNumber);
+  }
+  if ((!idx && !current) || current === "otherInfo") {
+    errors.otherInfo = validOtherInfo(otherInfo);
+  }
+
   return errors;
 };
 

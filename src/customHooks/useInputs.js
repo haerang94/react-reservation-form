@@ -1,23 +1,31 @@
 import { useCallback } from "react";
 import { valid } from "utils/validation";
-import { setInfo, setInfoErrors } from "modules/info";
+import { setInfo, setInfoErrors, setFocus } from "modules/info";
 import { useSelector, useDispatch } from "react-redux";
 
 function useInputs() {
-  const { info, info_errors } = useSelector((state) => ({
+  const { info, info_errors, focus } = useSelector((state) => ({
     info: state.info.info,
     info_errors: state.info.info_errors,
+    focus: state.info.focus,
   }));
+
   const dispatch = useDispatch();
 
   const onChange = useCallback(
-    (e) => {
+    (idx, e) => {
       e.persist();
-      const { name, value } = e.target;
-      const newValues = { ...info, [name]: value };
+      let { name, value } = e.target;
+      if (name.slice(0, 6) === "gender") {
+        name = "gender";
+      }
+      const newInfo = [...info];
+      newInfo[idx] = { ...info[idx], [name]: value };
+      const newErrors = [...info_errors];
 
-      const newErrors = valid(newValues, name, info_errors);
-      dispatch(setInfo(newValues));
+      const temp = valid(newInfo[idx], name, info_errors[idx], idx);
+      newErrors[idx] = temp;
+      dispatch(setInfo(newInfo));
       dispatch(setInfoErrors(newErrors));
     },
     [info, dispatch, info_errors]
@@ -26,19 +34,39 @@ function useInputs() {
   const onSubmit = useCallback(
     (e) => {
       e.persist();
-      const newErrors = valid(info, null, info_errors);
+      const newErrors = [...info_errors];
+      for (let i = 0; i < info.length; i++) {
+        const temp = valid(info[i], null, info_errors[i], i);
+        newErrors[i] = temp;
+      }
+
       dispatch(setInfoErrors(newErrors));
-      for (const value of Object.values(newErrors)) {
-        if (value) {
+
+      for (const [key, value] of Object.entries(newErrors)) {
+        for (const [k, v] of Object.entries(value)) {
+          if (k === "hour") break;
+          // if (key === "1") continue;
+          if (v) {
+            console.log(key, k);
+            dispatch(setFocus([key, k]));
+            return;
+          }
+        }
+      }
+
+      for (const [k, v] of Object.entries(newErrors[0])) {
+        if (v) {
+          dispatch(setFocus([0, k]));
           return;
         }
       }
+
       alert("예약이 완료되었습니다.");
     },
     [info, dispatch, info_errors]
   );
 
-  return [info, onChange, info_errors, onSubmit];
+  return [info, onChange, info_errors, onSubmit, focus];
 }
 
 export default useInputs;

@@ -1,14 +1,20 @@
 import React from "react";
-import Traveler from "components/Traveler";
+import TravelerList from "components/TravelerList";
 import useInputs from "customHooks/useInputs";
-const TravelerContainer = () => {
-  const [values, onChange, errors] = useInputs();
+const TravelerContainer = React.memo(() => {
+  const [values, onChange, errors, , focus] = useInputs();
 
   return (
     <div>
-      <Traveler values={values} onChange={onChange} errors={errors} idx={1} />
+      <TravelerList
+        values={values}
+        onChange={onChange}
+        errors={errors}
+        cnt={values.length}
+        focus={focus}
+      ></TravelerList>
     </div>
   );
-};
+});
 
 export default TravelerContainer;

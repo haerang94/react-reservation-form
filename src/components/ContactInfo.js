@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { Alert, Input } from "components/SharedComponents";
 
@@ -51,7 +51,19 @@ const Name = styled(PhoneNumber)`
   width: 100%;
 `;
 
-const ContactInfo = ({ values, onChange, errors }) => {
+const ContactInfo = React.memo(({ values, onChange, errors, focus }) => {
+  const userNameRef = useRef();
+  const phoneNumberRef = useRef();
+  useEffect(() => {
+    console.log(focus);
+    const [, target] = focus;
+
+    if (target === "username") {
+      userNameRef.current.focus();
+    } else if (target === "phoneNumber") {
+      phoneNumberRef.current.focus();
+    }
+  }, [focus]);
   return (
     <ContactWrapper>
       <header>상세 핸드폰 정보</header>
@@ -61,11 +73,12 @@ const ContactInfo = ({ values, onChange, errors }) => {
           type="text"
           placeholder="홍길동"
           name="username"
-          onChange={onChange}
-          value={values.username || ""}
-          alert={errors.username}
+          onChange={(e) => onChange(0, e)}
+          value={values[0].username || ""}
+          alert={errors[0].username}
+          ref={userNameRef}
         />
-        {errors.username && <Alert>{errors.username}</Alert>}
+        {errors[0].username && <Alert>{errors[0].username}</Alert>}
       </Name>
       <PhoneNumber>
         <header>핸드폰 번호</header>
@@ -78,16 +91,17 @@ const ContactInfo = ({ values, onChange, errors }) => {
               type="text"
               placeholder="'-'없이 입력해 주세요."
               name="phoneNumber"
-              value={values.phoneNumber || ""}
-              onChange={onChange}
-              alert={errors.phoneNumber}
+              value={values[0].phoneNumber || ""}
+              onChange={(e) => onChange(0, e)}
+              alert={errors[0].phoneNumber}
+              ref={phoneNumberRef}
             />
-            {errors.phoneNumber && <Alert>{errors.phoneNumber}</Alert>}
+            {errors[0].phoneNumber && <Alert>{errors[0].phoneNumber}</Alert>}
           </div>
         </FlexContainer>
       </PhoneNumber>
     </ContactWrapper>
   );
-};
+});
 
 export default ContactInfo;
