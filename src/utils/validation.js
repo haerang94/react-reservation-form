@@ -64,8 +64,8 @@ const validPhoneNumber = (phoneNumber) => {
 };
 
 // 현재 onChange가 일어나는 input창에서만 경고 메세지를 띄우고 싶어 current로 현재 input이 일어나는 태그를 표시했습니다.
+// onSubmit의 경우 current는 null입니다.
 const valid = (
-  current,
   {
     firstName,
     lastName,
@@ -78,30 +78,39 @@ const valid = (
     hour,
     minute,
   },
-  submit
+  current,
+  info_errors
 ) => {
-  const errors = {};
-  if (submit || current === "firstName") {
+  const errors = { ...info_errors };
+  if (!current || current === "firstName") {
     errors.firstName = validEnglishName(firstName);
   }
-  if (submit || current === "lastName") {
+  if (!current || current === "lastName") {
     errors.lastName = validEnglishName(lastName);
-  } else if (current === "koreanName") {
+  }
+  if (!current || current === "koreanName") {
     errors.koreanName = validKorean(koreanName);
-  } else if (current === "gender") {
+  }
+  if (!current || current === "gender") {
     errors.gender = validGender(gender);
-  } else if (current === "birthdate") {
+  }
+  if (!current || current === "birthdate") {
     errors.birthdate = validBirthdate(birthdate);
-  } else if (current === "username") {
+  }
+  if (!current || current === "username") {
     errors.username = validEnglishName(username);
-  } else if (current === "otherInfo") {
+  }
+  if (!current || current === "otherInfo") {
     errors.otherInfo = validOtherInfo(otherInfo);
-  } else if (current === "phoneNumber") {
+  }
+  if (!current || current === "phoneNumber") {
     errors.phoneNumber = validPhoneNumber(phoneNumber);
-  } else if (current === "hour") {
+  }
+  if (!current || current === "hour") {
     if (hour === "시") errors.hour = "시간을 선택해주세요.";
     else errors.hour = null;
-  } else if (current === "minute") {
+  }
+  if (!current || current === "minute") {
     if (minute === "분") errors.minute = "분을 선택해주세요.";
     else errors.minute = null;
   }

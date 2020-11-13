@@ -1,11 +1,13 @@
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import { valid } from "utils/validation";
 import { setInfo, setInfoErrors } from "modules/info";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-function useInputs(initialState, initialErrors) {
-  const [values, setValues] = useState(initialState);
-  const [errors, setErrors] = useState(initialErrors);
+function useInputs() {
+  const { info, info_errors } = useSelector((state) => ({
+    info: state.info.info,
+    info_errors: state.info.info_errors,
+  }));
   const dispatch = useDispatch();
 
   const onChange = useCallback(
@@ -13,32 +15,29 @@ function useInputs(initialState, initialErrors) {
       e.persist();
       const { name, value } = e.target;
 
-      const newValues = { ...values, [name]: value };
-      setValues((values) => ({ ...values, [name]: value }));
-      setErrors(valid(name, newValues));
+      const newValues = { ...info, [name]: value };
+
+      const newErrors = valid(newValues, name, info_errors);
       dispatch(setInfo(newValues));
-      dispatch(setInfoErrors(valid(name, newValues)));
+      dispatch(setInfoErrors(newErrors));
     },
-    [values]
+    [info, dispatch, info_errors]
   );
 
   const onSubmit = useCallback(
     (e) => {
       e.persist();
-      setErrors(valid("none", values, "submit"));
-      const res = valid("none", values, "submit");
-      console.log("res", res);
-      if (valid("none", values, "submit") === {}) {
-        console.log(valid("none", values, "submit"));
+      dispatch(setInfoErrors(valid(info, null, info_errors)));
 
+      if (info_errors === {}) {
         alert("결제");
       } else {
       }
     },
-    [values]
+    [info, dispatch, info_errors]
   );
 
-  return [values, onChange, errors, onSubmit];
+  return [info, onChange, info_errors, onSubmit];
 }
 
 export default useInputs;
