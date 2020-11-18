@@ -4,6 +4,7 @@ import useInputs from "customHooks/useInputs";
 
 const TimeContainer = React.memo(() => {
   const [values, onChange, errors, , focus] = useInputs();
+  console.log("time container");
   return (
     <Time
       values={values}

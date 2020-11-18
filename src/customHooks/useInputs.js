@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 import { valid } from "utils/validation";
 import { initialInfo, initialErrors } from "utils/initialState";
-import { setInfo, setInfoErrors, setFocus } from "modules/info";
-import { useSelector, useDispatch } from "react-redux";
+// import { setInfo, setInfoErrors, setFocus } from "modules/info";
+// import { useSelector, useDispatch } from "react-redux";
 import { useInfoState, useInfoDispatch } from "context/infoContext";
 
 // 전역 상태를 가져와서 사용하는 커스텀 훅
@@ -13,7 +13,7 @@ function useInputs() {
   const info_errors = state.info_errors;
   const focus = state.focus;
   const dispatch = useInfoDispatch();
-  const values = { info, info_errors, focus };
+
   // const { info, info_errors, focus } = useSelector((state) => ({
   //   info: state.info.info,
   //   info_errors: state.info.info_errors,

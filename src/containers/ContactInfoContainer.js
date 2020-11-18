@@ -7,7 +7,7 @@ import useInputs from "customHooks/useInputs";
 const ContactInfoContainer = React.memo(() => {
   // 전역 상태를 useInputs라는 커스텀 훅을 통해서 사용한다
   const [values, onChange, errors, , focus] = useInputs();
-
+  console.log("contactInfo container");
   return (
     <ContactInfo
       values={values}
