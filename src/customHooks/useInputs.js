@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import { valid } from "utils/validation";
+import { initialInfo, initialErrors } from "utils/initialState";
 import { setInfo, setInfoErrors, setFocus } from "modules/info";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -42,46 +43,8 @@ function useInputs() {
   );
 
   const reset = useCallback(() => {
-    dispatch(
-      setInfo([
-        {
-          firstName: null,
-          lastName: null,
-          koreanName: null,
-          gender: null,
-          birthdate: null,
-          hour: "시",
-          minute: "분",
-        },
-        {
-          firstName: null,
-          lastName: null,
-          koreanName: null,
-          gender: null,
-          birthdate: null,
-        },
-      ])
-    );
-    dispatch(
-      setInfoErrors([
-        {
-          firstName: null,
-          lastName: null,
-          koreanName: null,
-          gender: null,
-          birthdate: null,
-        },
-        {
-          firstName: null,
-          lastName: null,
-          koreanName: null,
-          gender: null,
-          birthdate: null,
-          hour: null,
-          minute: null,
-        },
-      ])
-    );
+    dispatch(setInfo(initialInfo));
+    dispatch(setInfoErrors(initialErrors));
     dispatch(setFocus([]));
   }, [dispatch]);
 
