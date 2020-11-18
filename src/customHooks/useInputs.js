@@ -1,18 +1,26 @@
 import { useCallback } from "react";
 import { valid } from "utils/validation";
+import { initialInfo, initialErrors } from "utils/initialState";
 import { setInfo, setInfoErrors, setFocus } from "modules/info";
 import { useSelector, useDispatch } from "react-redux";
+import { useInfoState, useInfoDispatch } from "context/infoContext";
 
 // 전역 상태를 가져와서 사용하는 커스텀 훅
 function useInputs() {
   // 모든 상태 정보와 에러정보, 유효성 검사를 통과하지 못한 최초의 부분에 대한 정보를 가져온다
-  const { info, info_errors, focus } = useSelector((state) => ({
-    info: state.info.info,
-    info_errors: state.info.info_errors,
-    focus: state.info.focus,
-  }));
+  const state = useInfoState();
+  const info = state.info;
+  const info_errors = state.info_errors;
+  const focus = state.focus;
+  const dispatch = useInfoDispatch();
+  const values = { info, info_errors, focus };
+  // const { info, info_errors, focus } = useSelector((state) => ({
+  //   info: state.info.info,
+  //   info_errors: state.info.info_errors,
+  //   focus: state.info.focus,
+  // }));
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // input, select 의 onChange기능을 구현한다
   const onChange = useCallback(
@@ -35,11 +43,22 @@ function useInputs() {
       // 새로운 에러 객체 업데이트
       newErrors[idx] = temp;
       // 전역 상태 변경
-      dispatch(setInfo(newInfo));
-      dispatch(setInfoErrors(newErrors));
+      dispatch({ type: "info/SET_INFO", info: newInfo });
+      dispatch({ type: "info/SET_INFO_ERRORS", info_errors: newErrors });
+      // dispatch(setInfo(newInfo));
+      // dispatch(setInfoErrors(newErrors));
     },
     [info, dispatch, info_errors]
   );
+
+  const reset = useCallback(() => {
+    dispatch({ type: "info/SET_INFO", info: initialInfo });
+    dispatch({ type: "info/SET_INFO_ERRORS", info_errors: initialErrors });
+    dispatch({ type: "info/FOCUS", focus: [] });
+    // dispatch(setInfo(initialInfo));
+    // dispatch(setInfoErrors(initialErrors));
+    // dispatch(setFocus([]));
+  }, [dispatch]);
 
   const onSubmit = useCallback(
     (e) => {
@@ -53,7 +72,8 @@ function useInputs() {
         newErrors[i] = temp;
       }
       // 계속해서 에러정보 업데이트
-      dispatch(setInfoErrors(newErrors));
+      dispatch({ type: "info/SET_INFO_ERRORS", info_errors: newErrors });
+      // dispatch(setInfoErrors(newErrors));
 
       // 새로운 에러객체를 돌며 최초로 유효성검사를 통과하지 못한 부분을 찾는다
       for (const [key, value] of Object.entries(newErrors)) {
@@ -62,7 +82,8 @@ function useInputs() {
           if (k === "hour") break;
           if (v) {
             //  key는 사용자의 인덱스 정보, k는 어떤 요소인지 나타낸다
-            dispatch(setFocus([key, k]));
+            dispatch({ type: "info/FOCUS", focus: [key, k] });
+            // dispatch(setFocus([key, k]));
             return;
           }
         }
@@ -71,14 +92,16 @@ function useInputs() {
       // 기타 정보들은 인덱스 0을 기준으로 한다
       for (const [k, v] of Object.entries(newErrors[0])) {
         if (v) {
-          dispatch(setFocus([0, k]));
+          dispatch({ type: "info/FOCUS", focus: [0, k] });
+          // dispatch(setFocus([0, k]));
           return;
         }
       }
       // 모든 유효성 검사를 통과했다면 예약 완료
       alert("예약이 완료되었습니다.");
+      reset();
     },
-    [info, dispatch, info_errors]
+    [info, dispatch, info_errors, reset]
   );
 
   return [info, onChange, info_errors, onSubmit, focus];

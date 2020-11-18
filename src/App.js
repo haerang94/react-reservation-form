@@ -3,6 +3,7 @@ import { ThemeProvider, createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 import theme from "styles/theme";
 import Reservation from "pages/Reservation";
+import { InfoProvider } from "context/infoContext";
 
 // styled components reset style, 폰트, global style 적용
 const GlobalStyle = createGlobalStyle`
@@ -51,10 +52,12 @@ const GlobalStyle = createGlobalStyle`
 
 const App = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <Reservation />
-    </ThemeProvider>
+    <InfoProvider>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Reservation />
+      </ThemeProvider>
+    </InfoProvider>
   );
 };
 

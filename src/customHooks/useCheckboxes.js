@@ -1,14 +1,11 @@
 import { useState, useCallback } from "react";
 import checkingTerms from "utils/termsCheck";
+import { initialTerms } from "utils/initialState";
 
 // 약관 체크 박스를 토글하는 기능 구현하는 커스텀 훅
 function useCheckboxes() {
   // 초기 체크 박스 상태는 모두 false이다
-  const [values, setValues] = useState({
-    allTerms: false,
-    travelerTerm: false,
-    bargainTerm: false,
-  });
+  const [values, setValues] = useState(initialTerms);
 
   const onClick = useCallback(
     (e) => {
@@ -24,7 +21,11 @@ function useCheckboxes() {
     [values]
   );
 
-  return [values, onClick];
+  const reset = useCallback(() => {
+    setValues(initialTerms);
+  }, []);
+
+  return [values, onClick, reset];
 }
 
 export default useCheckboxes;
