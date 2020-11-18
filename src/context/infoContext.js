@@ -1,6 +1,5 @@
 import React, { useReducer, createContext, useContext } from "react";
 
-const GET_INFO = "info/GET_INFO";
 // 정보 다시 set하기
 const SET_INFO = "info/SET_INFO";
 // 에러 정보 set
@@ -53,7 +52,9 @@ function infoReducer(state, action) {
     case SET_INFO:
       return { ...state, info: action.info };
     case SET_INFO_ERRORS:
-      return { ...state, info_errors: action.errors };
+      return { ...state, info_errors: action.info_errors };
+    case SET_FOCUS:
+      return { ...state, focus: action.focus };
     default:
       return state;
   }
@@ -74,9 +75,17 @@ export function InfoProvider({ children }) {
 }
 
 export function useInfoState() {
-  return useContext(InfoStateContext);
+  const context = useContext(InfoStateContext);
+  if (!context) {
+    throw new Error("canant find useInfoProvider");
+  }
+  return context;
 }
 
 export function useInfoDispatch() {
-  return useContext(InfoDispatchContext);
+  const context = useContext(InfoDispatchContext);
+  if (!context) {
+    throw new Error("cannt find infoProvider");
+  }
+  return context;
 }
