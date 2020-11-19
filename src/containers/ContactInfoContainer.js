@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import ContactInfo from "components/ContactInfo";
 import useInputs from "customHooks/useInputs";
 
@@ -8,12 +8,30 @@ const ContactInfoContainer = React.memo(() => {
   // 전역 상태를 useInputs라는 커스텀 훅을 통해서 사용한다
   const [values, onChange, errors, , focus] = useInputs();
   console.log("contactInfo container");
+  const handleChange = useCallback(
+    (e) => {
+      onChange(0, e);
+    },
+    [onChange]
+  );
+  const newErrors = useMemo(
+    () => ({
+      username: errors[0].username,
+      phoneNumber: errors[0].phoneNumber,
+    }),
+    [errors]
+  );
+  const username = useMemo(() => values[0].username, [values]);
+  const phoneNumber = useMemo(() => values[0].phoneNumber, [values]);
+
+  const target = focus[1];
   return (
     <ContactInfo
-      values={values}
-      onChange={onChange}
-      errors={errors}
-      focus={focus}
+      username={username}
+      phoneNumber={phoneNumber}
+      onChange={handleChange}
+      errors={newErrors}
+      target={target}
     ></ContactInfo>
   );
 });

@@ -52,57 +52,62 @@ const Name = styled(PhoneNumber)`
 `;
 //  프레젠테이셔널 컴포넌트. 스타일 정보를 가지며 부모로부터 받은 props로 렌더링
 // 상세 핸드폰 정보 컴포넌트
-const ContactInfo = React.memo(({ values, onChange, errors, focus }) => {
-  const userNameRef = useRef();
-  const phoneNumberRef = useRef();
-
-  // 가장 처음 focus가 걸리는 부분이 target이고 해당 부분으로 포커스가 잡힌다
-  useEffect(() => {
-    const [, target] = focus;
-    if (target === "username") {
-      userNameRef.current.focus();
-    } else if (target === "phoneNumber") {
-      phoneNumberRef.current.focus();
-    }
-  }, [focus]);
-  return (
-    <ContactWrapper>
-      <header>상세 핸드폰 정보</header>
-      <Name>
-        <header>사용자 이름</header>
-        <Input
-          type="text"
-          placeholder="홍길동"
-          name="username"
-          onChange={(e) => onChange(0, e)}
-          value={values[0].username || ""}
-          alert={errors[0].username}
-          ref={userNameRef}
-        />
-        {errors[0].username && <Alert>{errors[0].username}</Alert>}
-      </Name>
-      <PhoneNumber>
-        <header>핸드폰 번호</header>
-        <FlexContainer>
-          <select name="hour" id="hour" defatulvalue={"82"}>
-            <option value="82">+82(대한민국)</option>
-          </select>
-          <div>
-            <Input
-              type="text"
-              placeholder="'-'없이 입력해 주세요."
-              name="phoneNumber"
-              value={values[0].phoneNumber || ""}
-              onChange={(e) => onChange(0, e)}
-              alert={errors[0].phoneNumber}
-              ref={phoneNumberRef}
-            />
-            {errors[0].phoneNumber && <Alert>{errors[0].phoneNumber}</Alert>}
-          </div>
-        </FlexContainer>
-      </PhoneNumber>
-    </ContactWrapper>
-  );
-});
+const ContactInfo = React.memo(
+  ({ username, phoneNumber, onChange, errors, target }) => {
+    const userNameRef = useRef();
+    const phoneNumberRef = useRef();
+    console.log("contact info");
+    // 가장 처음 focus가 걸리는 부분이 target이고 해당 부분으로 포커스가 잡힌다
+    useEffect(() => {
+      // const [, target] = focus;
+      if (target === "username") {
+        userNameRef.current.focus();
+      } else if (target === "phoneNumber") {
+        phoneNumberRef.current.focus();
+      }
+    }, [target]);
+    return (
+      <ContactWrapper>
+        <header>상세 핸드폰 정보</header>
+        <Name>
+          <header>사용자 이름</header>
+          <Input
+            type="text"
+            placeholder="홍길동"
+            name="username"
+            onChange={onChange}
+            value={username || ""}
+            alert={errors.username}
+            ref={userNameRef}
+          />
+          {errors.username && <Alert>{errors.username}</Alert>}
+        </Name>
+        <PhoneNumber>
+          <header>핸드폰 번호</header>
+          <FlexContainer>
+            <select name="hour" id="hour" defatulvalue={"82"}>
+              <option value="82">+82(대한민국)</option>
+            </select>
+            <div>
+              <Input
+                type="text"
+                placeholder="'-'없이 입력해 주세요."
+                name="phoneNumber"
+                value={phoneNumber || ""}
+                onChange={onChange}
+                alert={errors.phoneNumber}
+                ref={phoneNumberRef}
+              />
+              {errors.phoneNumber && <Alert>{errors.phoneNumber}</Alert>}
+            </div>
+          </FlexContainer>
+        </PhoneNumber>
+      </ContactWrapper>
+    );
+  },
+  (prevProps, nextProps) => {
+    return JSON.stringify(prevProps) === JSON.stringify(nextProps);
+  }
+);
 
 export default ContactInfo;

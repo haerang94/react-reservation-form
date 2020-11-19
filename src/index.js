@@ -8,6 +8,7 @@ import rootReducer from "modules";
 const store = createStore(rootReducer);
 //  전역 상태관리로 redux 사용
 ReactDOM.render(
+  // 개발환경에서만 적용, 개발환경속도 높이고 hooks오용 방지하기 위해 2번 렌더링
   <React.StrictMode>
     <Provider store={store}>
       <div>
